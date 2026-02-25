@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q2W-Hipb1eSDSY2HOQ3yF",
+    "worldId": "infinite-etude",
+    "chatId": "chat-1771989293208-jvpbz33at",
+    "type": "message",
+    "payload": {
+      "content": "'@maestro-composer Create a simple HTML page with a heading and one paragraph only.',",
+      "sender": "human",
+      "role": "user"
+    },
+    "meta": {
+      "sender": "human",
+      "chatId": "chat-1771989293208-jvpbz33at",
+      "ownerAgentIds": [
+        "madame-pedagogue",
+        "maestro-composer",
+        "monsieur-engraver"
+      ],
+      "recipientAgentId": null,
+      "originalSender": null,
+      "deliveredToAgents": [
+        "madame-pedagogue",
+        "maestro-composer",
+        "monsieur-engraver"
+      ],
+      "messageDirection": "broadcast",
+      "isMemoryOnly": false,
+      "isCrossAgentMessage": false,
+      "isHumanMessage": true,
+      "threadRootId": null,
+      "threadDepth": 0,
+      "isReply": false,
+      "hasReplies": false,
+      "llmTokensInput": null,
+      "llmTokensOutput": null,
+      "llmLatency": null,
+      "llmProvider": null,
+      "llmModel": null,
+      "hasToolCalls": false,
+      "toolCallCount": 0
+    },
+    "createdAt": "2026-02-25T03:17:27.672Z",
+    "seq": 1
+  },
+  {
+    "id": "TW1uZvwwdBdFeRPurrELZ",
+    "worldId": "infinite-etude",
+    "chatId": "chat-1771989293208-jvpbz33at",
+    "type": "system",
+    "payload": {
+      "eventType": "chat-title-updated",
+      "chatId": "chat-1771989293208-jvpbz33at",
+      "title": "@maestro-composer Create a simple HTML page with a heading and one paragraph only.',",
+      "source": "message-no-activity",
+      "message": "Chat title updated: @maestro-composer Create a simple HTML page with a heading and one paragraph only.',"
+    },
+    "meta": {},
+    "createdAt": "2026-02-25T03:17:33.339Z",
+    "seq": 2
+  }
+]

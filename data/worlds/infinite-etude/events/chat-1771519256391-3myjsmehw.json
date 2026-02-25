@@ -1,0 +1,120 @@
+[
+  {
+    "id": "6fbPm2Ufa-mIQn3u_zvy2",
+    "worldId": "infinite-etude",
+    "chatId": "chat-1771519256391-3myjsmehw",
+    "type": "message",
+    "payload": {
+      "content": "@maestro-composer Compose a short C major sight-reading etude in 4/4 and hand off correctly",
+      "sender": "human",
+      "role": "user"
+    },
+    "meta": {
+      "sender": "human",
+      "chatId": "chat-1771519256391-3myjsmehw",
+      "ownerAgentIds": [
+        "madame-pedagogue",
+        "maestro-composer",
+        "monsieur-engraver"
+      ],
+      "recipientAgentId": "maestro-composer",
+      "originalSender": null,
+      "deliveredToAgents": [
+        "madame-pedagogue",
+        "maestro-composer",
+        "monsieur-engraver"
+      ],
+      "messageDirection": "broadcast",
+      "isMemoryOnly": false,
+      "isCrossAgentMessage": false,
+      "isHumanMessage": true,
+      "threadRootId": null,
+      "threadDepth": 0,
+      "isReply": false,
+      "hasReplies": false,
+      "llmTokensInput": null,
+      "llmTokensOutput": null,
+      "llmLatency": null,
+      "llmProvider": null,
+      "llmModel": null,
+      "hasToolCalls": false,
+      "toolCallCount": 0
+    },
+    "createdAt": "2026-02-19T16:41:07.082Z",
+    "seq": 1
+  },
+  {
+    "id": "szlmL--G8pG-k-MCTPhQb-sse-start",
+    "worldId": "infinite-etude",
+    "chatId": "chat-1771519256391-3myjsmehw",
+    "type": "sse",
+    "payload": {
+      "agentName": "maestro-composer",
+      "type": "start"
+    },
+    "meta": {
+      "agentName": "maestro-composer",
+      "sseType": "start"
+    },
+    "createdAt": "2026-02-19T16:41:07.088Z",
+    "seq": 2
+  },
+  {
+    "id": "szlmL--G8pG-k-MCTPhQb-sse-end",
+    "worldId": "infinite-etude",
+    "chatId": "chat-1771519256391-3myjsmehw",
+    "type": "sse",
+    "payload": {
+      "agentName": "maestro-composer",
+      "type": "end"
+    },
+    "meta": {
+      "agentName": "maestro-composer",
+      "sseType": "end"
+    },
+    "createdAt": "2026-02-19T16:41:13.749Z",
+    "seq": 3
+  },
+  {
+    "id": "szlmL--G8pG-k-MCTPhQb",
+    "worldId": "infinite-etude",
+    "chatId": "chat-1771519256391-3myjsmehw",
+    "type": "message",
+    "payload": {
+      "content": "I have composed a short C Major sight-reading etude in 4/4 time. It starts with two measures of quarter notes ascending the scale: C4, D4, E4, F4, followed by G4, A4, B4, C5. The third measure introduces an eighth note pattern descending back down to G4 but then skips directly to a C5 quarter note on beat 3. For the final measure, it plays the notes in half notes alternating between G4 and C5.\n\n@Madame Pedagogue",
+      "sender": "maestro-composer",
+      "replyToMessageId": "6fbPm2Ufa-mIQn3u_zvy2"
+    },
+    "meta": {
+      "sender": "maestro-composer",
+      "chatId": "chat-1771519256391-3myjsmehw",
+      "ownerAgentIds": [
+        "maestro-composer",
+        "madame-pedagogue"
+      ],
+      "recipientAgentId": "madame-pedagogue",
+      "originalSender": null,
+      "deliveredToAgents": [
+        "maestro-composer",
+        "madame-pedagogue"
+      ],
+      "messageDirection": "incoming",
+      "isMemoryOnly": true,
+      "isCrossAgentMessage": true,
+      "isHumanMessage": false,
+      "threadRootId": "6fbPm2Ufa-mIQn3u_zvy2",
+      "threadDepth": 1,
+      "isReply": true,
+      "hasReplies": false,
+      "llmTokensInput": null,
+      "llmTokensOutput": null,
+      "llmLatency": null,
+      "llmProvider": null,
+      "llmModel": null,
+      "hasToolCalls": false,
+      "toolCallCount": 0
+    },
+    "createdAt": "2026-02-19T16:41:13.754Z",
+    "seq": 4
+  }
+]

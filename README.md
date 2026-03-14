@@ -1,37 +1,77 @@
 # Awesome Agent World
 
-This is a repo for sharing worlds and skills for [Agent World](https://github.com/yysun/agent-world).
+This repository stores "worlds", "agents", and "skills" for the Agent World app. The recommended organization places each world, agent, or skill in its own folder at the repository root, using the item's ID as the folder name so the app can import by path or URL.
 
 ## How to Use
 
-In the Agent World App, you can import worlds and skills from this repository by following these steps:
-1. Click on the "Import" button in the app.
-2. Enter the URL of the world or skill you want to import from this repository. For example, if you want to import the "Infinite Etude" world, you would enter `https://github.com/yysun/awesome-agent-world/data/worlds/infinite-etude`.
+In the Agent World App, import items from this repository by pointing the importer at the folder for a world, agent, or skill. Examples:
 
+- Import a world by path: `worlds/infinite-etude`
+- Import a world by GitHub URL: `https://github.com/yysun/awesome-agent-world/tree/main/worlds/infinite-etude`
+- Import a skill by path: `skills/music-to-svg`
+- Import an agent by path: `agents/madame-pedagogue`
 
-## Worlds
+Steps:
+1. Click the "Import" button in the app.
+2. Enter the repository path (examples above) or the full GitHub URL to the folder you want to import.
 
-| Name | Description | Path | Tags |
-| ---- | ----------- | ----- | ---- |
-|Infinite Etude|A world where agents can practice and improve their skills in an infinite loop.|[data/worlds/infinite-etude](data/worlds/infinite-etude)|practice, improvement, music, guitar|
+## Recommended Repository Layout
 
+Organize the repository root with three top-level folders: `worlds`, `agents`, and `skills`. Each item gets its own folder named with the item's ID.
 
-## Skills
+Example layout:
 
-| Name | Description | Path | Tags |
-| ---- | ----------- | ----- | ---- |
+```
+worlds/
+	infinite-etude/               # world id: infinite-etude
+		config.json
+		setup-agents.ts
+		agents/                     # optional per-world agent overrides/definitions
+			madame-pedagogue/         # agent id: madame-pedagogue
+				config.json
+				memory.json
+				system-prompt.md
+			maestro-composer/
 
+agents/                         # standalone agents (can also live under a world)
+	madame-pedagogue/             # agent id: madame-pedagogue
+		config.json
+		memory.json
+		system-prompt.md
+
+skills/
+	music-to-svg/                 # skill id: music-to-svg
+		README.md
+		requirements.txt
+		scripts/
+			convert.py
+		tests/
+
+README.md
+LICENSE
+```
+
+Notes:
+- The folder name is the canonical ID used for imports (`worlds/<id>`, `agents/<id>`, `skills/<id>`).
+- Worlds can contain an `agents/` subfolder for agents specific to that world; standalone agents may live under the top-level `agents/` folder.
+
+## Examples
+
+| Type | Name | Path |
+| ---- | ---- | ---- |
+| World | Infinite Etude | [worlds/infinite-etude](worlds/infinite-etude) |
+| Agent | Madame Pedagogue | [agents/madame-pedagogue](agents/madame-pedagogue) |
+| Skill | Music → SVG | [skills/music-to-svg](skills/music-to-svg) |
 
 ## Contributing
 
-If you have created a world or skill that you would like to share, please follow these steps:
+If you'd like to add a world, agent, or skill:
 
-1. Fork this repository and create a new branch for your contribution.
-2. From the Agent World App, export your world or skill as a JSON file and save it in the appropriate directory in your forked repository (e.g., `data/worlds` for worlds and `data/skills` for skills).
-3. Add your world or skill to the appropriate section in the README.md file, following the existing format.
-4. Commit your changes and push them to your forked repository.
-5. Create a pull request to merge your changes into the main repository.
-6. Once your pull request is reviewed and approved, it will be merged into the main repository.
+1. Fork this repository and create a new branch.
+2. Export your item from the Agent World App and add it to the appropriate top-level folder in your fork: `worlds/`, `agents/`, or `skills/`. Name the folder with the item's ID (for example `worlds/my-cool-world`).
+3. Update this README (if desired) with a row in the Examples table for visibility.
+4. Commit and push your changes to your fork.
+5. Open a pull request against this repository's `main` branch.
 
 ## License
 

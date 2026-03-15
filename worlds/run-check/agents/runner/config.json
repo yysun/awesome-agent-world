@@ -1,0 +1,15 @@
+{
+  "id": "runner",
+  "name": "runner",
+  "type": "assistant",
+  "status": "inactive",
+  "provider": "google",
+  "model": "gemini-2.5-flash",
+  "temperature": 0.5,
+  "maxTokens": 4096,
+  "autoReply": false,
+  "llmCallCount": 2,
+  "createdAt": "2026-03-15T23:09:41.000Z",
+  "lastActive": "2026-03-15T19:03:45.745Z",
+  "lastLLMCall": "2026-03-15T19:09:39.789Z"
+}

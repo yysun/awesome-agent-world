@@ -17,6 +17,7 @@ Example import paths:
 | Name | Description | Path |
 | ---- | ----------- | ---- |
 | Infinite Etude | Generative sight-reading trainer workspace with a composer, pedagogue, and engraver pipeline for playable sheet music exercises. | `worlds/infinite-etude` |
+| run-check | Two-agent execution-and-review world that runs a task with a `runner` agent and validates the result with a `checker` agent. | `worlds/run-check` |
 
 ## Agents
 | Name | Description | Path |
@@ -44,13 +45,35 @@ Example layout:
 ```
 worlds/
 	infinite-etude/               # world id: infinite-etude
+		README.md
 		config.json
+		prompts/                    # optional world-level prompt assets
+			monsieur-engraver.md
 		setup-agents.ts
 		agents/                     # optional per-world agent overrides/definitions
+			maestro-composer/         # agent id: maestro-composer
+				config.json
+				system-prompt.md
 			madame-pedagogue/         # agent id: madame-pedagogue
 				config.json
 				system-prompt.md
-			maestro-composer/
+			monsieur-engraver/        # agent id: monsieur-engraver
+				config.json
+				system-prompt.md
+	run-check/                    # world id: run-check
+		config.json
+		mcp.json
+		agents/
+			runner/
+				config.json
+				memory.json
+				system-prompt.md
+			checker/
+				config.json
+				memory.json
+				system-prompt.md
+		chats/                      # optional persisted chat transcripts
+		events/                     # optional persisted event logs
 
 agents/                         # standalone agents (can also live under a world)
 	madame-pedagogue/             # agent id: madame-pedagogue
@@ -72,6 +95,8 @@ LICENSE
 Notes:
 - The folder name is the canonical ID used for imports (`worlds/<id>`, `agents/<id>`, `skills/<id>`).
 - Worlds can contain an `agents/` subfolder for agents specific to that world; standalone agents may live under the top-level `agents/` folder.
+- Worlds may also include supporting files such as their own `README.md`, setup scripts, and prompt assets.
+- Some worlds also persist runtime artifacts such as `chats/`, `events/`, agent `memory.json`, or `mcp.json` alongside their configuration.
 
 
 ## Contributing
@@ -87,4 +112,3 @@ If you'd like to add a world, agent, or skill:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-

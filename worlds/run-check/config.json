@@ -1,0 +1,13 @@
+{
+  "id": "run-check",
+  "name": "run-check",
+  "description": "Execute user's request using Github Copilot CLI and check if it meets the requirements.",
+  "turnLimit": 5,
+  "mainAgent": "runner",
+  "chatLLMProvider": "google",
+  "chatLLMModel": "gemini-2.5-flash",
+  "heartbeatEnabled": false,
+  "heartbeatInterval": null,
+  "heartbeatPrompt": null,
+  "_queuedChatIds": {}
+}

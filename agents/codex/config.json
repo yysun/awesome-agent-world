@@ -1,0 +1,15 @@
+{
+  "id": "codex",
+  "name": "codex",
+  "type": "assistant",
+  "status": "inactive",
+  "provider": "azure",
+  "model": "gpt-5-chat",
+  "temperature": 0,
+  "maxTokens": 4096,
+  "autoReply": false,
+  "llmCallCount": 0,
+  "createdAt": "2026-03-12T18:30:46.000Z",
+  "lastActive": "2026-03-12T03:46:40.597Z",
+  "lastLLMCall": "2026-03-12T04:04:55.658Z"
+}

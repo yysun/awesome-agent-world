@@ -1,0 +1,15 @@
+{
+  "id": "copilot",
+  "name": "copilot",
+  "type": "default",
+  "status": "inactive",
+  "provider": "azure",
+  "model": "gpt-5-chat",
+  "temperature": 0,
+  "maxTokens": 4096,
+  "autoReply": false,
+  "llmCallCount": 5,
+  "createdAt": "2026-03-12T18:32:20.000Z",
+  "lastActive": "2026-03-12T03:46:21.686Z",
+  "lastLLMCall": "2026-03-12T14:32:18.622Z"
+}

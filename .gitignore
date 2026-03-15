@@ -43,6 +43,3 @@ database.db*
 chats/
 events/
 memory.json
-data/worlds/default-world/
-data/worlds/red-mansion/
-database.db*

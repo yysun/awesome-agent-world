@@ -10,8 +10,6 @@ import sys
 import tempfile
 from typing import Optional
 
-import music21
-
 
 def _svg_to_markdown_data_uri(svg_content: str) -> str:
     svg_b64 = base64.b64encode(svg_content.encode("utf-8")).decode("ascii")
@@ -33,11 +31,6 @@ def _call_verovio_export(verovio_path: str, in_path: str, out_path: str) -> None
 def musicxml_to_svg(musicxml_path: str, svg_path: str, verovio_path: Optional[str] = None) -> None:
     if not os.path.exists(musicxml_path):
         raise FileNotFoundError(f"Input MusicXML not found: {musicxml_path}")
-
-    try:
-        music21.converter.parse(musicxml_path)
-    except Exception as e:
-        raise RuntimeError(f"music21 failed to parse MusicXML: {e}") from e
 
     vr = verovio_path or _find_verovio_candidate()
     if not vr:

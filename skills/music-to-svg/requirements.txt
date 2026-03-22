@@ -1,1 +1,2 @@
-music21>=7.0
+# No Python package dependencies.
+# Install the Verovio CLI separately and ensure `verovio` is on PATH.

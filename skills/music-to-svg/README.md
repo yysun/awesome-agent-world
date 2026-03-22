@@ -29,17 +29,18 @@ If you want to run or test this repository locally, follow this exact sequence:
 brew install verovio
 ```
 
-2. Create and activate a virtual environment:
+2. No Python package installation is required for the converter itself.
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+verovio --version
 ```
 
-3. Install Python dependencies:
+The script uses only the Python standard library plus the external `verovio` CLI.
+
+If you want to run tests locally, install `pytest` in whatever Python environment you are already using:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install pytest
 ```
 
 ## Skill Purpose

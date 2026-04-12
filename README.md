@@ -1,6 +1,6 @@
 # Awesome Agent World
 
-This repository stores "worlds", "agents", and "skills" for the Agent World app. The recommended organization places each world, agent, or skill in its own folder at the repository root, using the item's ID as the folder name so the app can import by path or URL.
+This repository stores "worlds", "agents", and "skills" for the [Agent World app](https://github.com/yysun/agent-world). The recommended organization places each world, agent, or skill in its own folder at the repository root, using the item's ID as the folder name so the app can import by path or URL.
 
 ## How to Use
 
@@ -10,6 +10,7 @@ Example import paths:
 
 - `worlds/infinite-etude`
 - `agents/copilot`
+- `skills/git-wiki`
 - `skills/music-to-svg`
 
 
@@ -30,10 +31,23 @@ Example import paths:
 ## Skills
 | Name | Description | Path |
 | ---- | ----------- | ---- |
+| git-wiki | Builds and maintains a local code-project wiki under `.wiki` using the current git-tracked repository as the source of truth. | `skills/git-wiki` |
 | music-to-svg | Converts a MusicXML file into markdown-embedded SVG score output using the repository converter script. | `skills/music-to-svg` |
 | notebooklm | Creates and manages NotebookLM notebooks, adds sources, queries notebook content, and generates artifacts through the NotebookLM CLI. | `skills/notebooklm` |
 | playwright-cli | Automates browser navigation, interaction, screenshots, and data extraction with Playwright CLI. | `skills/playwright-cli` |
 | youtube-search | Searches YouTube by keyword and returns structured video results using the included `yt-dlp` helper script. | `skills/youtube-search` |
+
+## Install Skills
+
+Install any individual skill from this repository with `npx skills add <repo> --skill <skill-id>`.
+
+```bash
+npx skills add yysun/awesome-agent-world --skill git-wiki
+npx skills add yysun/awesome-agent-world --skill music-to-svg
+npx skills add yysun/awesome-agent-world --skill notebooklm
+npx skills add yysun/awesome-agent-world --skill playwright-cli
+npx skills add yysun/awesome-agent-world --skill youtube-search
+```
 
 
 ## Repository Layout
@@ -81,6 +95,8 @@ agents/                         # standalone agents (can also live under a world
 		system-prompt.md
 
 skills/
+	git-wiki/                     # skill id: git-wiki
+		SKILL.md
 	music-to-svg/                 # skill id: music-to-svg
 		README.md
 		requirements.txt

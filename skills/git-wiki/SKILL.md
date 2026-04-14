@@ -28,7 +28,7 @@ Required:
 
 Optional (create as needed):
 
-* `.wiki/features/` — one page per significant feature, module, or source file
+* `.wiki/features/` — one page per significant feature, module
 * `.wiki/bug-fixes/` — one page per notable bug fix or patch
 * `.wiki/concepts/` — cross-cutting ideas and patterns
 * `.wiki/entities/` — data models, schemas, types
@@ -186,7 +186,7 @@ Do not auto-fix unless explicitly asked.
 * Use concrete file paths as anchors (`src/api/routes.ts:42`)
 * Separate facts (directly read from source) from inferences (your interpretation)
 * Cross-link related pages with `[[wiki-links]]`
-* Keep pages under ~300 words; create additional pages rather than growing one page long
+* Keep pages under ~500 words; create additional pages rather than growing one page long
 * Prefer useful coverage over exhaustive coverage — a good wiki is navigable, not encyclopedic
 
 ## Quality Bar

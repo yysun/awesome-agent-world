@@ -2,7 +2,7 @@
 name: git-wiki
 description: |
    Build and maintain a local code-project wiki under .wiki. Use this skill whenever the user mentions "wiki", "ingest", "refresh wiki", "update wiki", "lint wiki", "check wiki", "document the codebase", or asks a question that can be answered from wiki pages. Also use it when the user asks how something works in the project and a wiki page could capture the answer for future reference.
-version: "1.3.0"
+version: "1.3.1"
 ---
 
 # Project Wiki
@@ -10,12 +10,14 @@ version: "1.3.0"
 Maintain a local wiki for a code project under `.wiki`.
 
 Source of truth is always the current git-tracked repository files at `HEAD`, including tracked documentation in `.docs/` and `docs/`, not the wiki.
+The wiki files themselves may be untracked; read and update the live `.wiki/` contents from the working tree when present.
 
 ## Rules
 
 * Operate only on git-tracked files and git history
 * Ignore staged and unstaged uncommitted changes; ingest and query verification use committed content at `HEAD` only
 * Exclude `.wiki/**` from git-based source selection
+* Do not assume `.wiki/**` is git-tracked; use the current `.wiki/index.md` checkpoint when it exists
 * Every wiki page must have YAML frontmatter
 * `.wiki/index.md` must be updated on every ingest
 * Do not ask the user before ingesting
@@ -51,7 +53,7 @@ updated_at: "YYYY-MM-DD"
 ---
 ```
 
-`last_commit` is the full git commit SHA at the time of the most recent full-repository ingest. On the next ingest, use this to find changed files with `git diff --name-status -M <last_commit> HEAD`.
+`last_commit` is the full git commit SHA at the time of the most recent full-repository ingest. This checkpoint lives in the current `.wiki/index.md` file whether or not `.wiki/` is git-tracked. On the next ingest, prefer this saved `last_commit` to find changed files with `git diff --name-status -M <last_commit> HEAD`.
 
 If git metadata is unavailable, do not fall back to filesystem scanning. Ingest and lint are unavailable until git access works again.
 
@@ -91,11 +93,12 @@ Trigger on:
 
 Workflow:
 
-1. Read `.wiki/index.md` if it exists — note `last_commit` from frontmatter
+1. Read `.wiki/index.md` from the working tree if it exists, even when `.wiki/` is untracked — note `last_commit` from frontmatter
    * Missing `.wiki/index.md` or a missing `last_commit` means there is no prior ingest checkpoint
 2. Run `git rev-parse HEAD` to get the current HEAD commit SHA
 3. Detect changed files:
    * If `last_commit` is set: `git diff --name-status -M <last_commit> HEAD` and exclude `.wiki/**`
+   * Use the saved `last_commit` even if the wiki is untracked; do not treat an untracked `.wiki/` as a fresh ingest from `HEAD`
    * Use the git status codes to distinguish added, modified, deleted, and renamed paths when updating wiki pages
    * If no prior ingest: build a broad ingest candidate set from `git ls-files` at `HEAD`, excluding `.wiki/**` (see Ingest Priorities below)
 4. Resolve scope:
@@ -109,6 +112,7 @@ Workflow:
    * Always set `updated_at` to today
    * Set `last_commit` to the current HEAD SHA only after a full ingest or after processing the complete changed-file set from the previous `last_commit`
    * If a broad ingest stops early after partial coverage, leave `last_commit` unchanged and note in `index.md` that bootstrap coverage is still partial
+   * Never discard an existing saved `last_commit` merely because `.wiki/` is untracked
 
 Ingest is automatic. Do not ask the user for confirmation.
 

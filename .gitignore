@@ -43,3 +43,4 @@ database.db*
 chats/
 events/
 memory.json
+output/

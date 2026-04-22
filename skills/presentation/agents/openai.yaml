@@ -1,0 +1,4 @@
+interface:
+  display_name: "SCR+BBP Presentation Strategist"
+  short_description: "Build visual-first executive deck storyboards"
+  default_prompt: "Use $presentation to turn my business problem and raw data into an SCR+BBP executive deck storyboard."

@@ -1,130 +1,147 @@
 # Awesome Agent World
 
-This repository stores "worlds", "agents", and "skills" for the [Agent World app](https://github.com/yysun/agent-world). The recommended organization places each world, agent, or skill in its own folder at the repository root, using the item's ID as the folder name so the app can import by path or URL.
+Awesome Agent World is a catalog of reusable assets for the [Agent World app](https://github.com/yysun/agent-world): complete `worlds`, standalone `agents`, and installable `skills`. Each importable item lives in its own folder named after its canonical ID so it can be referenced directly by path.
 
-## How to Use
+This repository also includes supporting material such as datasets, generated outputs, slide work, and scratch projects used to develop or demonstrate those assets.
 
-In the Agent World App, import items from this repository by pointing the repo as yysun@awesome-agent-world and a world, agent, or skill. 
+## Quick Start
+
+In Agent World, import from the GitHub repository `yysun/awesome-agent-world` and point at the asset path you want.
 
 Example import paths:
 
 - `worlds/infinite-etude`
+- `worlds/run-check`
 - `agents/copilot`
 - `skills/git-wiki`
 - `skills/music-to-svg`
 
-
-## Worlds
-| Name | Description | Path |
-| ---- | ----------- | ---- |
-| Infinite Etude | Generative sight-reading trainer workspace with a composer, pedagogue, and engraver pipeline for playable sheet music exercises. | `worlds/infinite-etude` |
-| run-check | Two-agent execution-and-review world that runs a task with a `runner` agent and validates the result with a `checker` agent. | `worlds/run-check` |
-
-## Agents
-| Name | Description | Path |
-| ---- | ----------- | ---- |
-| codex | Thin proxy agent that forwards user requests to Codex CLI in the current working directory. | `agents/codex` |
-| copilot | Thin proxy agent that forwards user requests to GitHub Copilot CLI with tool access enabled. | `agents/copilot` |
-| gemini | Thin proxy agent that forwards user requests to Gemini CLI in the current working directory. | `agents/gemini` |
-
-
-## Skills
-| Name | Description | Path |
-| ---- | ----------- | ---- |
-| git-wiki | Builds and maintains a local code-project wiki under `.wiki` using the current git-tracked repository as the source of truth. | `skills/git-wiki` |
-| music-to-svg | Converts a MusicXML file into markdown-embedded SVG score output using the repository converter script. | `skills/music-to-svg` |
-| notebooklm | Creates and manages NotebookLM notebooks, adds sources, queries notebook content, and generates artifacts through the NotebookLM CLI. | `skills/notebooklm` |
-| playwright-cli | Automates browser navigation, interaction, screenshots, and data extraction with Playwright CLI. | `skills/playwright-cli` |
-| youtube-search | Searches YouTube by keyword and returns structured video results using the included `yt-dlp` helper script. | `skills/youtube-search` |
-
-## Install Skills
-
-Install any individual skill from this repository with `npx skills add <repo> --skill <skill-id>`.
+Install an individual skill from this repository with:
 
 ```bash
 npx skills add yysun/awesome-agent-world --skill git-wiki
 npx skills add yysun/awesome-agent-world --skill music-to-svg
 npx skills add yysun/awesome-agent-world --skill notebooklm
 npx skills add yysun/awesome-agent-world --skill playwright-cli
+npx skills add yysun/awesome-agent-world --skill presentation-strategist
+npx skills add yysun/awesome-agent-world --skill react-app
+npx skills add yysun/awesome-agent-world --skill workspace-design
 npx skills add yysun/awesome-agent-world --skill youtube-search
 ```
 
+## Catalog
+
+### Worlds
+
+| Name | Description | Path |
+| ---- | ----------- | ---- |
+| Infinite Etude | Generative sight-reading trainer workspace with a composer, pedagogue, and engraver pipeline for playable music exercises. | `worlds/infinite-etude` |
+| run-check | Execution-and-review world that runs a user request with a `runner` agent and checks the result against the requirements. | `worlds/run-check` |
+
+### Agents
+
+| Name | Description | Path |
+| ---- | ----------- | ---- |
+| codex | Proxy agent that forwards the user request to Codex CLI in the current working directory. | `agents/codex` |
+| copilot | Proxy agent that forwards the user request to GitHub Copilot CLI with tool access enabled. | `agents/copilot` |
+| gemini | Proxy agent that forwards the user request to Gemini CLI in the current working directory. | `agents/gemini` |
+
+### Skills
+
+| Name | Description | Path |
+| ---- | ----------- | ---- |
+| git-wiki | Builds and maintains a local code-project wiki under `.wiki` using git-tracked repository content as the source of truth. | `skills/git-wiki` |
+| music-to-svg | Converts MusicXML into markdown-embedded SVG output using the repository converter script. | `skills/music-to-svg` |
+| notebooklm | Creates and manages NotebookLM notebooks, adds sources, queries content, and generates artifacts through the NotebookLM CLI. | `skills/notebooklm` |
+| playwright-cli | Automates browser navigation, interaction, screenshots, and data extraction with Playwright CLI. | `skills/playwright-cli` |
+| presentation-strategist | Plans, storyboards, critiques, and rewrites presentation outlines and slide decks. | `skills/presentation-strategist` |
+| react-app | Creates, refactors, reviews, and organizes React web apps that use Tailwind or utility-first CSS. | `skills/react-app` |
+| workspace-design | Designs or reviews business operation pages as task-centric workspaces instead of generic admin consoles. | `skills/workspace-design` |
+| youtube-search | Searches YouTube by keyword and returns structured video results using the included `yt-dlp` helper script. | `skills/youtube-search` |
 
 ## Repository Layout
 
-The repository root has three top-level folders: `worlds`, `agents`, and `skills`. Inside the folders each item gets its own folder named with the item's ID.
+Importable assets live under `worlds/`, `agents/`, and `skills/`. The folder name is the canonical ID used for imports such as `worlds/<id>`, `agents/<id>`, and `skills/<id>`.
 
-Example layout:
-
-```
+```text
 worlds/
-	infinite-etude/               # world id: infinite-etude
-		README.md
+	infinite-etude/
 		config.json
-		prompts/                    # optional world-level prompt assets
-			monsieur-engraver.md
+		README.md
 		setup-agents.ts
-		agents/                     # optional per-world agent overrides/definitions
-			maestro-composer/         # agent id: maestro-composer
-				config.json
-				system-prompt.md
-			madame-pedagogue/         # agent id: madame-pedagogue
-				config.json
-				system-prompt.md
-			monsieur-engraver/        # agent id: monsieur-engraver
-				config.json
-				system-prompt.md
-	run-check/                    # world id: run-check
+		agents/
+		prompts/
+	run-check/
 		config.json
 		mcp.json
 		agents/
-			runner/
-				config.json
-				memory.json
-				system-prompt.md
-			checker/
-				config.json
-				memory.json
-				system-prompt.md
-		chats/                      # optional persisted chat transcripts
-		events/                     # optional persisted event logs
+		chats/
+		events/
 
-agents/                         # standalone agents (can also live under a world)
-	madame-pedagogue/             # agent id: madame-pedagogue
+agents/
+	codex/
 		config.json
+		memory.json
+		system-prompt.md
+	copilot/
+		config.json
+		memory.json
+		system-prompt.md
+	gemini/
+		config.json
+		memory.json
 		system-prompt.md
 
 skills/
-	git-wiki/                     # skill id: git-wiki
+	git-wiki/
 		SKILL.md
-	music-to-svg/                 # skill id: music-to-svg
+	music-to-svg/
 		README.md
 		requirements.txt
 		scripts/
-			convert.py
 		tests/
-
-README.md
-LICENSE
+	notebooklm/
+		SKILL.md
+	playwright-cli/
+		SKILL.md
+		references/
+	presentation-strategist/
+		SKILL.md
+	react-app/
+		SKILL.md
+	workspace-design/
+		SKILL.md
+	youtube-search/
+		SKILL.md
+		scripts/
 ```
 
 Notes:
-- The folder name is the canonical ID used for imports (`worlds/<id>`, `agents/<id>`, `skills/<id>`).
-- Worlds can contain an `agents/` subfolder for agents specific to that world; standalone agents may live under the top-level `agents/` folder.
-- Worlds may also include supporting files such as their own `README.md`, setup scripts, and prompt assets.
-- Some worlds also persist runtime artifacts such as `chats/`, `events/`, agent `memory.json`, or `mcp.json` alongside their configuration.
 
+- Worlds may contain world-specific agents, prompt assets, setup scripts, and persisted runtime artifacts.
+- Standalone agents live under `agents/` and typically provide `config.json`, `system-prompt.md`, and optional `memory.json`.
+- Skills live under `skills/` and usually expose a `SKILL.md` contract plus any helper scripts, tests, or reference material they need.
+
+## Supporting Directories
+
+The repository root also contains supporting material that is not itself imported as Agent World assets:
+
+- `datasets/` shared evaluation or robustness datasets.
+- `output/` generated documents, slide tooling, and rendered artifacts.
+- `slides/` presentation source material, builds, previews, and verification assets.
+- `tmp/` scratch workspaces and in-progress presentation projects.
 
 ## Contributing
 
-If you'd like to add a world, agent, or skill:
+If you want to add or update a world, agent, or skill:
 
-1. Fork this repository and create a new branch.
-2. Export your item from the Agent World App and add it to the appropriate top-level folder in your fork: `worlds/`, `agents/`, or `skills/`. Name the folder with the item's ID (for example `worlds/my-cool-world`).
-3. Update this README (if desired) with a row in the catalog tables for visibility.
-4. Commit and push your changes to your fork.
-5. Open a pull request against this repository's `main` branch.
+1. Fork this repository and create a branch.
+2. Add the item under the appropriate top-level folder: `worlds/`, `agents/`, or `skills/`.
+3. Name the folder with the canonical ID you expect users to import.
+4. Include the item's config and prompt files, plus a `README.md` or `SKILL.md` when the asset needs usage guidance.
+5. Update the catalog tables in this README so the asset is discoverable.
+6. Open a pull request against `main`.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.

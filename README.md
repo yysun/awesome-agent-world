@@ -23,7 +23,7 @@ npx skills add yysun/awesome-agent-world --skill git-wiki
 npx skills add yysun/awesome-agent-world --skill music-to-svg
 npx skills add yysun/awesome-agent-world --skill notebooklm
 npx skills add yysun/awesome-agent-world --skill playwright-cli
-npx skills add yysun/awesome-agent-world --skill presentation-strategist
+npx skills add yysun/awesome-agent-world --skill story-deck
 npx skills add yysun/awesome-agent-world --skill react-app
 npx skills add yysun/awesome-agent-world --skill workspace-design
 npx skills add yysun/awesome-agent-world --skill youtube-search
@@ -54,7 +54,7 @@ npx skills add yysun/awesome-agent-world --skill youtube-search
 | music-to-svg | Converts MusicXML into markdown-embedded SVG output using the repository converter script. | `skills/music-to-svg` |
 | notebooklm | Creates and manages NotebookLM notebooks, adds sources, queries content, and generates artifacts through the NotebookLM CLI. | `skills/notebooklm` |
 | playwright-cli | Automates browser navigation, interaction, screenshots, and data extraction with Playwright CLI. | `skills/playwright-cli` |
-| presentation-strategist | Plans, storyboards, critiques, and rewrites presentation outlines and slide decks. | `skills/presentation-strategist` |
+| story-deck | Plans, storyboards, critiques, and rewrites presentation outlines and slide decks. | `skills/story-deck` |
 | react-app | Creates, refactors, reviews, and organizes React web apps that use Tailwind or utility-first CSS. | `skills/react-app` |
 | workspace-design | Designs or reviews business operation pages as task-centric workspaces instead of generic admin consoles. | `skills/workspace-design` |
 | youtube-search | Searches YouTube by keyword and returns structured video results using the included `yt-dlp` helper script. | `skills/youtube-search` |
@@ -105,7 +105,7 @@ skills/
 	playwright-cli/
 		SKILL.md
 		references/
-	presentation-strategist/
+	story-deck/
 		SKILL.md
 	react-app/
 		SKILL.md

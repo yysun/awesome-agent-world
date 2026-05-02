@@ -1,0 +1,4 @@
+interface:
+  display_name: "Story Deck"
+  short_description: "Build visual-first executive deck storyboards"
+  default_prompt: "Use $story-deck to turn my business problem and raw data into an SCR executive deck storyboard. Use BBP only if I explicitly ask for Beyond Bullet Points."

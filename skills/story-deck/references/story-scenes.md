@@ -1,18 +1,18 @@
-# Story Scenes Reference
+# Story Scenes Contract
 
 Use this reference for full storyboard, critique, rewrite, Marp, or PPTX work.
 
-## Scene-Based Rules
+## Scene Rules
 
-- Treat each slide as a scene, not a section. A slide should create a moment in the story, not merely cover a topic.
-- The deck owns the overall arc. Each slide owns one scene beat that advances the arc.
+- Treat each slide as a scene, not a section.
+- The deck owns the full arc; each slide advances one scene beat.
 - Do not force every slide to contain a full SCR or BBP arc.
-- Every scene must change the audience's understanding: reveal something, sharpen a tension, expose a false belief, prove a point, or make the next decision clearer.
+- Every slide must change the audience's understanding.
 - Every slide should pull the audience toward the next slide.
 
 ## Scene Roles
 
-Choose one scene role for every full-storyboard slide:
+Choose one role for every full-storyboard slide:
 
 - Establish the world
 - Surface the false belief
@@ -37,31 +37,25 @@ Choose one emotional job for every full-storyboard slide:
 - Clarity
 - Commitment
 
-## Dramatic Momentum
+## Momentum Checks
 
-- Every deck needs a visible before/after gap: current reality vs. desired future.
-- Make the stakes explicit: what gets better if we act, and what gets worse if we wait.
-- Use contrast to create momentum: old way vs. new way, hidden risk vs. visible proof, scattered effort vs. focused path.
-- Escalate tension before resolving it; do not jump from context to recommendation too quickly.
-- Give each act or chapter a turning point: the moment the audience sees why the current path is insufficient.
-- End with relief and agency: the audience should feel the path is clear and the next action is achievable.
-- Use movie-like pacing with business discipline: setup, tension, reveal, consequence, resolution, proof, decision.
-- Use vivid, memorable language when it clarifies the business point. Avoid cheesy trailer lines, fake drama, heroic cliches, and overacting.
-- The goal is not drama. The goal is momentum.
+- Make the before/after gap visible.
+- Escalate tension before resolving it.
+- Use controlled intensity, not melodrama.
+- End with a clear next action and a sense of agency.
 
 ## Bridge to Next
 
-Every full storyboard slide should include a bridge:
+Each slide should create one bridge:
 
-- What question does this slide raise?
-- What tension does it sharpen?
-- What curiosity does it create?
-- What does the next slide answer?
+- A question the next slide answers
+- A tension the next slide sharpens
+- A curiosity the next slide resolves
+- A decision the next slide makes clearer
 
 ## Speaker Notes
 
-- Presenter Script must be speakable out loud: conversational, complete sentences, clear transitions, no outline fragments.
-- Write notes as what the presenter would actually say in the room.
-- Avoid telegraphic bullets, jargon stacks, and slide-reading narration.
-- Speaker notes can be vivid, but should sound like a person in a meeting.
-- Keep evidence precise: exact language for proof, assumptions, caveats, and decisions.
+- Write notes as spoken narration, not outline fragments.
+- Use conversational, complete sentences with clear transitions.
+- Put detailed evidence, caveats, calculations, and assumptions in notes.
+- Keep proof language exact even when framing language is vivid.

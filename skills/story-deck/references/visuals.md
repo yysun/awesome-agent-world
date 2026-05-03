@@ -57,10 +57,11 @@ Input format:
 Rules:
 
 - Use one shared `"style"` value for all slides in a deck. Put consistency rules there, especially titleless/no-text behavior.
+- If the target Marp/PPTX deck uses a non-white slide background color, replace `plain white background` in the default style with that exact color name or hex value so generated images blend with the deck.
 - Each slide's `Image Generation Brief` becomes the `"prompt"` value for that slide in `deck.json`.
 - Name each slide entry `{slide-number}-{short-slug}`, e.g. `"01-cover"`, `"03-market-shift"`.
 - Generated bitmap assets must be saved and referenced with `.png`, `.jpg`, or `.jpeg`.
-- The helper writes each slide entry named `"01-cover"` as `01-cover.png` by default.
+- The helper uses the returned image MIME type: `image/jpeg` becomes `.jpg`, `image/png` becomes `.png`, and unknown image MIME types default to `.png`.
 
 ## Image Generation Brief Writing
 
@@ -89,8 +90,10 @@ Bitmap images are titleless. Never ask for a headline, title, caption, banner te
 Use this exact `"style"` value in `deck.json` unless the user asks for a different style:
 
 ```text
-Polished executive sketchnote in a whiteboard explainer aesthetic, business presentation quality, not childish. Express the idea through a simple metaphor, analogy, or familiar everyday scene that reads instantly and feels lightly human. Clean black outlines, playful marker lettering, soft blue green yellow pink accents, transparent background, 16:9 landscape composition. Titleless image: no headline, no title text, no captions, no banners, no chart titles, no watermark. Simple and spacious: one central idea, 3 to 5 major elements maximum, one large focal diagram preferred, bigger shapes, fewer labels, shorter arrows, very little text inside the image, only one to four tiny short labels when necessary. Preserve clear negative space so the slide reads instantly from a distance. Avoid dense dashboards, crowded boards, repeated mini cards, tiny details, generic corporate icons, and decorative clutter.
+Polished executive sketchnote in a whiteboard explainer aesthetic, business presentation quality, not childish. Express the idea through a simple metaphor, analogy, or familiar everyday scene that reads instantly and feels lightly human. Clean black outlines, playful marker lettering, soft blue green yellow pink accents, plain white background, 16:9 landscape composition. Titleless image: no headline, no title text, no captions, no banners, no chart titles, no watermark. Simple and spacious: one central idea, 3 to 5 major elements maximum, one large focal diagram preferred, bigger shapes, fewer labels, shorter arrows, very little text inside the image, only one to four tiny short labels when necessary. Preserve clear negative space so the slide reads instantly from a distance. Avoid dense dashboards, crowded boards, repeated mini cards, tiny details, generic corporate icons, and decorative clutter.
 ```
+
+For decks with a known slide background, modify only the background phrase. Example: replace `plain white background` with `solid #F7F4ED background` or `solid deep navy background`.
 
 ## Freeform Style Translations
 

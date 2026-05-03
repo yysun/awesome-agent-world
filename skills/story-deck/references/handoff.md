@@ -49,6 +49,7 @@ If the user asks for Marp, Markdown slides, HTML slides, or a presentation that 
 
 - Produce Marp-compatible Markdown.
 - Use `---` slide separators.
+- If the deck uses a background color, pass that color into bitmap image generation style before generating image assets.
 - Put each slide's headline as the first heading.
 - Keep on-slide content minimal.
 - Put presenter script and support under Marp speaker notes using `<!-- ... -->` comments.
@@ -110,5 +111,7 @@ evidence_gaps:
 ```
 
 If bitmap assets are needed, generate them before or during the PPTX build and pass the saved file paths into the presentation workflow.
+
+If the PPTX uses a slide background color, pass that color into bitmap image generation style before generating image assets.
 
 Keep charts, timelines, matrices, diagrams, and annotated screenshots editable in PPTX rather than generating them as bitmap images.

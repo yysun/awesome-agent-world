@@ -45,6 +45,20 @@ function buildPrompt(style, prompt) {
   return `${style.trim()} ${prompt.trim()}`.trim();
 }
 
+function extensionForMimeType(mimeType) {
+  const normalizedMimeType = (mimeType || "").toLowerCase();
+
+  if (normalizedMimeType === "image/jpeg" || normalizedMimeType === "image/jpg") {
+    return ".jpg";
+  }
+
+  if (normalizedMimeType === "image/png") {
+    return ".png";
+  }
+
+  return ".png";
+}
+
 export async function generateGeminiAssets({
   slides,
   style,
@@ -93,13 +107,15 @@ export async function generateGeminiAssets({
     }
 
     const bytes = Buffer.from(imagePart.inlineData.data, "base64");
-    const filePath = path.join(resolvedOutDir, `${slide.name}.png`);
+    const mimeType = imagePart.inlineData.mimeType || imagePart.inlineData.mime_type;
+    const filePath = path.join(resolvedOutDir, `${slide.name}${extensionForMimeType(mimeType)}`);
     await fs.writeFile(filePath, bytes);
 
     results.push({
       name: slide.name,
       prompt: slide.prompt,
       model: selectedModel,
+      mimeType,
       filePath,
     });
   }

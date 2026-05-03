@@ -184,6 +184,7 @@ Input format:
 Rules:
 - Each storyboard `Image Generation Brief` becomes a slide `"prompt"` in `deck.json`.
 - Name each entry `{slide-number}-{short-slug}`, e.g. `"01-cover"`, `"03-market-shift"`.
+- If the target Marp/PPTX deck uses a slide background color, include that color in the shared `"style"` value before generating images.
 - Generated bitmap assets must be saved and referenced with `.png`, `.jpg`, or `.jpeg`.
 - If the CLI is unavailable or fails, report the blocker and do not invent a replacement script.
 

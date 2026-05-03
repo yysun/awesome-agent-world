@@ -6,7 +6,17 @@ Use this reference when the selected framework is BBP / Beyond Bullet Points. As
 
 Before writing the Step 3 BBP storyline or the slide-title approval list, draft the strongest natural business sequence first, then map it to BBP labels.
 
-Prefer this kind of strategic flow when it fits the topic:
+General BBP flow:
+
+1. Establish the audience's current world.
+2. Name the belief or habit that no longer works.
+3. Show the cost of staying there.
+4. Reveal the new lens.
+5. Show the path forward.
+6. Prove the path is credible.
+7. Make the decision feel necessary and doable.
+
+For product strategy, AI workflow, CRM, task management, or operating model decks, this sharper flow often works better:
 
 1. Start with the business request and reframe the real problem.
 2. Show why the obvious solution adds work but does not solve the miss.
@@ -20,7 +30,7 @@ Prefer this kind of strategic flow when it fits the topic:
 10. Name what to build first.
 11. Land the payoff in business terms.
 
-Use this pass to improve flow, not to lengthen the deck. Merge or skip beats that do not earn a slide.
+Use this pass to improve flow, not to lengthen the deck. Choose the general or specialized flow based on the topic, then merge or skip beats that do not earn a slide.
 
 Output this before the formal BBP storyline:
 

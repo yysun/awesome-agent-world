@@ -73,10 +73,22 @@ Before creating slides, select the central thesis:
 Story Thesis: [One memorable business claim that anchors the deck.]
 Audience Shift: [What the audience believes before vs. after.]
 Core Tension: [The gap or conflict that creates momentum.]
+False Belief: [What the audience currently assumes that the deck must correct.]
+Turning Point: [The moment the audience sees the problem differently.]
 Deck Metaphor: [Optional: one consistent metaphor/world for generated visuals.]
 ```
 
-If the user asked for a finished artifact, choose the strongest thesis from context, state it as an assumption, and continue to the slide-title approval gate. Finished artifacts are two-turn by default unless the user explicitly says to skip title approval. If the request is exploratory and the thesis is genuinely ambiguous, propose 2-3 options and ask the user to pick one.
+For strategic, executive, investor, product, recommendation, or BBP decks, generate 2-3 thesis candidates before selecting the strongest unless the user already supplied a strong thesis. For each candidate, include:
+
+- Story Thesis
+- Audience Shift
+- Core Tension
+- False Belief
+- Turning Point
+- Why it may hit
+- Weakness / risk
+
+Select the strongest thesis based on clarity, tension, business consequence, and memorability. If the user asked for an interactive checkpoint, ask them to choose. If the user asked for a finished artifact, state the selected thesis as an assumption and continue to the slide-title approval gate.
 
 ### Step 3 - Framework Storyline
 
@@ -108,7 +120,7 @@ Rules:
 - For SCR, titles are Dots/action-title claims, not topics.
 - For BBP, titles are reveal headlines that make the next scene necessary.
 - In BBP Act II, anchors are arguments, not product history.
-- For finished artifacts such as Marp, PPTX, or generated visuals, pause here by default. Continue only after title approval, or immediately if the user explicitly said to skip the title gate.
+- For finished artifacts such as Marp, PPTX, or generated visuals, pause here by default when user interaction is available and the user has not requested immediate completion. Continue immediately only if the user explicitly asked to create the finished artifact now, skip title approval, or run non-interactively; include the refined title list in the handoff or artifact.
 - Ask: "Approve these slide titles before I build the detailed storyboard?"
 - For quick outlines, stop here unless the user asks for details.
 
@@ -181,6 +193,8 @@ Before finalizing, confirm:
 
 - [ ] Framework is explicit; SCR is default only when no framework is named.
 - [ ] Story Thesis was selected before slides were created.
+- [ ] Strategic decks considered 2-3 thesis candidates unless the user supplied a strong thesis.
+- [ ] Selected thesis includes Audience Shift, Core Tension, False Belief, and Turning Point.
 - [ ] Title approval gate completed before detailed storyboard work.
 - [ ] BBP Flow Shaping Pass completed before title refinement when BBP is selected.
 - [ ] Title Refinement Pass completed before the approval list.

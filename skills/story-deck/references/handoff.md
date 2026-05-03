@@ -74,6 +74,41 @@ Include in any handoff:
 - Speaker notes
 - Evidence gaps
 
+## Handoff Packet Contract
+
+When handing to another deck production skill or tool, pass a structured packet with these fields:
+
+```yaml
+selected_framework: SCR | BBP
+story_thesis: string
+audience: string
+objective: string
+style: string
+slide_titles:
+  - number: number
+    label: string
+    title: string
+storyboard:
+  - number: number
+    label: string
+    title: string
+    scene_role: string
+    emotional_job: string
+    bridge_to_next: string
+    visual_recommendation: string
+    image_generation_brief: string | null
+    speaker_notes: string
+visual_asset_plan: string
+bitmap_asset_paths:
+  - string
+editable_visual_specs:
+  - string
+speaker_notes:
+  - string
+evidence_gaps:
+  - string
+```
+
 If bitmap assets are needed, generate them before or during the PPTX build and pass the saved file paths into the presentation workflow.
 
 Keep charts, timelines, matrices, diagrams, and annotated screenshots editable in PPTX rather than generating them as bitmap images.

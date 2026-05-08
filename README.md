@@ -13,12 +13,14 @@ Example import paths:
 - `worlds/infinite-etude`
 - `worlds/run-check`
 - `agents/copilot`
+- `skills/ai-workspace`
 - `skills/git-wiki`
 - `skills/music-to-svg`
 
 Install an individual skill from this repository with:
 
 ```bash
+npx skills add yysun/awesome-agent-world --skill ai-workspace
 npx skills add yysun/awesome-agent-world --skill git-wiki
 npx skills add yysun/awesome-agent-world --skill music-to-svg
 npx skills add yysun/awesome-agent-world --skill notebooklm
@@ -50,6 +52,7 @@ npx skills add yysun/awesome-agent-world --skill youtube-search
 
 | Name | Description | Path |
 | ---- | ----------- | ---- |
+| ai-workspace | Creates, reviews, audits, and validates AI workspaces for agent hosts such as Codex, Copilot, and Gemini. | `skills/ai-workspace` |
 | git-wiki | Builds and maintains a local code-project wiki under `.wiki` using git-tracked repository content as the source of truth. | `skills/git-wiki` |
 | music-to-svg | Converts MusicXML into markdown-embedded SVG output using the repository converter script. | `skills/music-to-svg` |
 | notebooklm | Creates and manages NotebookLM notebooks, adds sources, queries content, and generates artifacts through the NotebookLM CLI. | `skills/notebooklm` |
@@ -93,6 +96,10 @@ agents/
 		system-prompt.md
 
 skills/
+	ai-workspace/
+		SKILL.md
+		references/
+		templates/
 	git-wiki/
 		SKILL.md
 	music-to-svg/

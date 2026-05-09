@@ -1,5 +1,9 @@
 # Agent Instructions
 
+Remove optional sections that do not apply.
+Use the same human language as the user's workspace request.
+Auto-detect vocabulary for category, object type, and layer names.
+
 ## Purpose
 
 This workspace is for:
@@ -19,37 +23,61 @@ The agent host can:
 - read workspace files;
 - write workspace files when requested;
 - create parent folders;
-- fetch web content when needed;
-- run skill-owned scripts through host tools.
-
-Users should not run skill scripts directly.
+- fetch web content when needed.
 
 ## Operating Rules
 
 - Keep always-on behavior in this file.
-- Use skills for reusable task workflows.
-- Keep skill-owned artifacts inside the skill folder.
+- Use `process/` for workspace-level workflow contracts.
+- Do not reference folders that do not exist.
 - Store durable outputs in documented locations.
 - Say what was inspected, changed, and verified.
 
+## File Map
+
+List only folders that exist in this workspace.
+
+- `process/`: workspace-level operating contracts.
+- `data/`: durable source evidence and knowledge artifacts.
+- `artifacts/`: generated deliverables and scratch output.
+
+## Domain Knowledge
+
+Domain setup:
+
+- <domain name | skipped>
+
+If a domain is supplied, use these layers:
+
+- `memory`: durable object knowledge.
+- `tension`: unresolved pressure, risk, or opportunity.
+- `insight`: current interpretation and consequence.
+- `action`: local recommended next moves.
+
+Localize layer filenames and section headings to the user's language.
+Keep the semantic meaning above.
+
+Layer process files:
+
+- `process/<localized-memory-layer>.md`
+- `process/<localized-tension-layer>.md`
+- `process/<localized-insight-layer>.md`
+- `process/<localized-action-layer>.md`
+
+Actions are local recommendations unless the user approves an external write.
+
 ## Artifact Paths
 
-Use this formula:
+Knowledge paths:
 
 ```txt
-<path formula>
+data/<localized-object-type>/<object-id>/<yyyy>/<mm>/<dd>/<localized-layer>.md
+data/<localized-object-type>/<object-id>/current/<localized-layer>.md
 ```
-
-Rules:
-
-- Date: <date source>.
-- Category: <allowed values>.
-- Slug: <normalization rule>.
-- Overwrite: <overwrite or version rule>.
 
 ## Validation
 
-Minimum smoke flow:
+Minimum validation flow:
 
 ```txt
 <host-executable validation flow>

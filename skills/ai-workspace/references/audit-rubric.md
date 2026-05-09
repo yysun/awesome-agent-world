@@ -4,112 +4,155 @@ Use this for review, audit, or validation.
 
 ## Scope
 
-Classify the target:
+Classify target:
 
-- file: one `AGENTS.md`, `SKILL.md`, prompt, script, or reference;
-- skill: one skill directory;
-- workspace: full repo-level agent surface.
+- file;
+- process contract;
+- skill directory;
+- full workspace.
 
-Do not expand scope unless the file's claims require evidence.
+Inspect only what the target requires.
 
 ## 1. Purpose
 
-Check for:
+Check:
 
-- workspace purpose;
-- explicit non-goals;
-- final decision owner;
+- purpose;
+- non-goals;
+- decision owner;
 - safety boundary.
 
 Red flags:
 
 - autonomy is overstated;
-- recommendation vs execution is unclear;
-- risky domains have no abstain/escalation rule.
+- execution vs recommendation is unclear;
+- risk has no escalation path.
 
-## 2. Host Discovery
+## 2. Architecture
 
-Check for:
+Check:
 
-- host-discovered root instructions;
-- README or human entry point;
-- skills in the repo or host convention;
-- host capability assumptions;
-- one source of truth.
+- root instructions are host-discovered;
+- process contracts exist for complex behavior;
+- skills are optional, not forced;
+- one source of truth exists;
+- generated file maps list only existing folders.
 
 Red flags:
 
 - behavior only exists in chat;
-- host bridge files duplicate each other;
-- skill triggers are vague;
+- workspace contracts are hidden in a skill;
+- duplicate root instructions conflict;
 - no obvious entry point.
+- docs reference missing `skills/`, `scripts/`, `.docs/`, or `docs/`.
 
-## 3. Skill Design
+## 3. Process Contracts
 
-Check for:
+Check:
 
-- strong frontmatter description;
-- clear inputs and outputs;
-- progressive disclosure;
-- references loaded only when needed;
-- templates for repeated outputs;
-- tests and fixtures inside the skill folder.
+- API contract exists when routes or fields matter;
+- auth and secret handling are explicit;
+- external writes require approval;
+- evidence storage is documented;
+- process files separate fact, judgment, and action.
 
 Red flags:
 
-- giant monolithic skill body;
-- vague trigger language;
-- hidden repo knowledge;
-- skill artifacts leak to root.
+- routes or fields are invented;
+- secrets may be printed or stored;
+- write gate is missing;
+- process rules live only in root prose.
 
-## 4. Scripts
+## 4. Domain Knowledge
 
-Check for:
+Check when present:
 
-- scripts only when deterministic value exists;
-- structured inputs;
-- host-invokable entry points;
-- tests and fixtures in the skill folder;
-- clear LLM-owned vs script-owned work.
+- domain is named;
+- language and vocabulary are detected from the user's request;
+- categories, object types, and layers use that vocabulary;
+- source evidence is defined;
+- `memory`, `tension`, `insight`, `action` layers exist;
+- dated and `current/` paths exist;
+- TTL and frontmatter rules exist;
+- actions are local recommendations by default.
+
+Red flags:
+
+- layers exist without a domain;
+- memory is generic summary;
+- insight is treated as fact;
+- action silently becomes an external task;
+- expired `current/` files are treated as fresh.
+- English path segments are forced in a non-English workspace.
+
+## 5. Scripts
+
+Check only when scripts exist or are referenced:
+
+- scripts add deterministic value;
+- scripts accept structured input;
+- scripts are host-invokable;
+- root scripts are referenced by `AGENTS.md` or `process/*.md`;
+- skill scripts are referenced only by that skill.
 
 Red flags:
 
 - generic file I/O wrappers;
 - generic web-fetch wrappers;
+- Python scripts created by default;
 - user-facing script instructions;
-- freeform chat input;
-- no validation for generated artifacts.
+- workspace scripts hidden in a skill folder.
 
-## 5. Artifacts
+## 6. Skills
 
-Check for:
+Check when present:
+
+- strong frontmatter description;
+- clear inputs and outputs;
+- focused workflow;
+- progressive disclosure;
+- skill-owned artifacts stay in the skill folder.
+
+Red flags:
+
+- skill exists without a discovery reason;
+- vague trigger language;
+- giant monolithic body;
+- hidden repo knowledge.
+
+Do not require a skill when `AGENTS.md + process/` is enough.
+
+## 7. Artifacts
+
+Check:
 
 - canonical output location;
-- path formula for nested layouts;
-- date, category, slug, and collision rules;
+- path formula;
+- object type, object ID, and layer rules;
+- localized vocabulary map;
+- overwrite or versioning rule;
 - durable vs temporary distinction;
 - reviewable history.
 
 Red flags:
 
 - ad hoc output folders;
-- implied but unwritten path rules;
-- overwrite behavior is unclear;
-- naming differs across similar outputs.
+- ambiguous category/layer names;
+- knowledge paths omit object identity;
+- overwrite behavior is unclear.
 
-## 6. Validation
+## 8. Validation
 
-Check for:
+Check:
 
-- runnable smoke flow;
-- host-executable validation;
-- tests for core contracts;
-- explicit unverified gaps.
+- simple validation flow exists;
+- strongest validation level is stated;
+- unverified gaps are named.
 
 Red flags:
 
 - "validated" means inspection only;
-- smoke flow skips the main path;
+- validation skips the main path;
 - no host-executable path proves behavior.
 
 ## Report
@@ -118,9 +161,9 @@ Include:
 
 - target type;
 - files inspected;
-- findings ordered by severity;
+- findings by severity;
 - structural vs behavioral gaps;
-- strongest verification level;
+- validation level;
 - smallest useful next changes.
 
 Severity:
@@ -131,7 +174,7 @@ Severity:
 
 Verdict:
 
-- strong: explicit, testable, discoverable, validated;
-- workable: usable, but light on validation;
+- strong: explicit, discoverable, validated;
+- workable: usable, light on validation;
 - fragile: inconsistent or chat-dependent;
 - unsafe: misleading, unbounded, or unverifiable.

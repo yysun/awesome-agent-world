@@ -37,17 +37,24 @@ Allowed sources:
 - <source type>;
 - <source type>.
 
-Raw evidence path:
+Dated raw evidence path, when needed:
 
 ```txt
 data/<source-kind>/<yyyy>/<mm>/<dd>/<slug>.json
+```
+
+Use dated raw evidence paths only when source evidence changes over time.
+For static source docs, document stable source paths instead:
+
+```txt
+<stable-source-path>
 ```
 
 Do not synthesize from unsupported chat history.
 
 ## Layer Paths
 
-Use object-first paths:
+Use dated object-first paths when history, audit trail, or time windows matter:
 
 ```txt
 data/<localized-object-type>/<object-id>/<yyyy>/<mm>/<dd>/<localized-sources-layer>.md
@@ -60,6 +67,9 @@ data/<localized-object-type>/<object-id>/current/<localized-tension-layer>.md
 data/<localized-object-type>/<object-id>/current/<localized-insight-layer>.md
 data/<localized-object-type>/<object-id>/current/<localized-action-layer>.md
 ```
+
+Use only `current/` when latest state is enough.
+Document the date-tracking decision in `process/data.md`.
 
 Do not use `data/<object>/<yyyy>/<mm>/<dd>/<localized-category>.md`.
 Create concrete object folders only when object IDs are known.
@@ -83,7 +93,7 @@ Map semantic layer meanings to local filenames:
 
 ## Frontmatter
 
-Each layer file must include:
+Object layer files must include:
 
 - `object_type`
 - `object_id`
@@ -96,6 +106,16 @@ Each layer file must include:
 - `source_files`
 
 Use localized values for `object_type` and `layer`.
+
+Seed layer files without object IDs must include:
+
+- `layer`
+- `generated_at`
+- `source_date`
+- `ttl`
+- `expires_at`
+- `status`
+- `source_files`
 
 ## TTL
 

@@ -36,12 +36,13 @@ The agent host can:
 ## File Map
 
 List only folders that exist in this workspace.
+Delete this section if no workspace folders are created.
 
-- `process/`: workspace-level operating contracts.
-- `data/`: durable source evidence and knowledge artifacts.
-- `artifacts/`: generated deliverables and scratch output.
+- `<folder>/`: <purpose>.
 
 ## Domain Knowledge
+
+Delete this section if domain setup is skipped.
 
 Domain setup:
 
@@ -68,12 +69,17 @@ Actions are local recommendations unless the user approves an external write.
 
 ## Artifact Paths
 
-Knowledge paths:
+Delete this section if no `data/` contract is created.
+
+Dated knowledge paths, when history matters:
 
 ```txt
 data/<localized-object-type>/<object-id>/<yyyy>/<mm>/<dd>/<localized-layer>.md
 data/<localized-object-type>/<object-id>/current/<localized-layer>.md
 ```
+
+Use only `current/` when latest state is enough.
+Document the date-tracking rule in `process/data.md`.
 
 ## Validation
 

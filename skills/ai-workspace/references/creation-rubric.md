@@ -70,6 +70,8 @@ Use process files for:
 - auth and secret handling;
 - write gates;
 - domain knowledge layers;
+- runtime or ingest flow;
+- object-type rules;
 - artifact lifecycle;
 - refresh rules.
 
@@ -102,9 +104,19 @@ If supplied, create:
 - `artifacts/`;
 - localized layer process files;
 - `process/data.md` with the object-first path formula;
+- localized runtime process file when workflow has a chain;
+- localized object-type process files when object types are known;
 - a vocabulary map for semantic layer meanings;
 - domain artifact contract;
 - TTL and frontmatter rules.
+
+If source docs are domain-level seed knowledge:
+
+- create `data/<localized-layer>.md` by default;
+- mention that multiple knowledge bases are supported;
+- use nested knowledge-base folders only when the user asks;
+- do not invent object IDs;
+- document the seed path in `process/data.md`.
 
 Create concrete object folders only for objects named by the user.
 Do not invent object IDs.
@@ -113,6 +125,9 @@ Use:
 
 - `domain-knowledge-rubric.md`;
 - `templates/domain-knowledge-contract.md`;
+- `templates/data-contract.md`;
+- `templates/runtime-process.md`;
+- `templates/object-process.md`;
 - layer process templates.
 
 Avoid:
@@ -151,7 +166,24 @@ Location:
 
 Do not mention `scripts/` in generated docs unless the folder exists.
 
-## 6. Skills
+## 6. API And Env
+
+For API-backed workspaces, create:
+
+- `process/api.yaml`;
+- `process/api.md`;
+- `.env.example` when environment variables are required;
+- `.gitignore` entry for `.env` when local secrets are expected.
+
+Do not create a real `.env` unless the user supplies non-secret values.
+
+Avoid:
+
+- storing tokens in repo files;
+- printing auth headers;
+- inventing API routes.
+
+## 7. Skills
 
 Skills are optional.
 
@@ -170,7 +202,7 @@ Avoid:
 - root-level skill artifacts.
 - mentioning `skills/` in generated docs when no skill folder exists.
 
-## 7. Generated Docs
+## 8. Generated Docs
 
 Required:
 
@@ -185,12 +217,13 @@ Avoid:
 - references to `skills/` unless a skill wrapper exists;
 - references to `scripts/` unless scripts exist.
 
-## 8. Artifacts
+## 9. Artifacts
 
 Required:
 
 - canonical output location;
 - path formula;
+- date tracking decision;
 - overwrite or versioning rule;
 - durable vs temporary distinction.
 
@@ -201,14 +234,42 @@ data/<localized-object-type>/<object-id>/<yyyy>/<mm>/<dd>/<localized-layer>.md
 data/<localized-object-type>/<object-id>/current/<localized-layer>.md
 ```
 
+Use dated folders when:
+
+- source evidence changes over time;
+- snapshots or audit history matter;
+- time windows affect interpretation;
+- `current/` must trace to a dated snapshot.
+
+For seed knowledge from domain-level source docs, use by default:
+
+```txt
+data/<localized-layer>.md
+```
+
+If the user asks for multiple knowledge bases, use:
+
+```txt
+data/<localized-knowledge-base>/<localized-layer>.md
+```
+
+Multiple seed knowledge bases need distinct sources, scope, and read routing.
+
+If date tracking is not needed, document the stable path and omit dated
+folders.
+
 Avoid:
 
 - ad hoc output folders;
+- one generic `knowledge-base` folder for unrelated domains;
+- overlapping knowledge bases with no routing rule;
 - ambiguous `category.md` layer names;
+- fake object IDs for domain-level seed knowledge;
+- dated folders with no history need;
 - English path segments in a non-English workspace;
 - overwriting without permission.
 
-## 9. Validation
+## 10. Validation
 
 Required:
 

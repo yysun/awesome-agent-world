@@ -26,6 +26,10 @@ Load required variables from the workspace environment:
 
 Never print, log, or store secrets.
 
+Create `.env.example` with variable names when env vars are required.
+Add `.env` to `.gitignore` when local secrets are expected.
+Do not create a real `.env` unless the user supplies non-secret values.
+
 ## Transport
 
 Prefer host tools and simple shell calls.

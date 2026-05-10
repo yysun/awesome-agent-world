@@ -18,7 +18,7 @@ An AI workspace makes behavior visible through files:
 - `process/` contracts for workspace-level workflows;
 - optional `skills/` for host-discoverable reusable workflows;
 - optional `scripts/` only for deterministic logic that host tools cannot do well;
-- durable `data/`, `artifacts/`, or `outputs/`;
+- durable `data/` and `artifacts/`;
 - a simple validation flow.
 
 Prefer `AGENTS.md + process/` by default.
@@ -110,6 +110,9 @@ When creating a knowledge base:
 - create `AGENTS.md`, `process/`, `data/`, and `artifacts/`;
 - create layer process files when a domain is known;
 - create `process/data.md` with the object-first path formula;
+- create a runtime process file when source-to-layer flow matters;
+- create object-type process files when object types are known;
+- create seed knowledge files when source docs are domain-level, not object-level;
 - create concrete object folders only for objects named by the user;
 - do not invent object IDs just to fill the tree.
 
@@ -121,6 +124,8 @@ Use:
 - `templates/api-guide.md` for API-backed process guidance;
 - `templates/domain-knowledge-contract.md` for domain knowledge;
 - `templates/data-contract.md` for knowledge folder contracts;
+- `templates/runtime-process.md` for source-to-layer workflow contracts;
+- `templates/object-process.md` for object-type contracts;
 - layer templates for the semantic layers below.
 
 Do not create generic file I/O or web-fetch scripts.
@@ -152,6 +157,10 @@ process/<insight-layer>.md
 process/<action-layer>.md
 ```
 
+Create `process/<runtime-layer>.md` only when source-to-layer flow matters.
+Create `process/<object-folder>/<object-type>.md` only when object types are
+known and need distinct rules.
+
 Layer meaning:
 
 - `memory`: durable object knowledge.
@@ -166,6 +175,31 @@ section headings, and path segments to the user's detected language.
 Keep a vocabulary map in `process/data.md` or the domain contract.
 Use stable path names once chosen.
 
+If source docs seed the domain but are not object instances, create a
+flat seed knowledge path by default:
+
+```txt
+data/<localized-layer>.md
+```
+
+Mention that multiple knowledge bases are supported.
+Use nested seed paths only when the user asks for multiple knowledge bases:
+
+```txt
+data/<localized-knowledge-base-a>/<localized-layer>.md
+data/<localized-knowledge-base-b>/<localized-layer>.md
+```
+
+Each requested knowledge base needs:
+
+- a stable localized name;
+- source document rules;
+- layer filename mapping;
+- update and overwrite rules;
+- routing rules for when to read it.
+
+Do not invent an object ID for seed knowledge.
+
 Actions are not external tasks or writes unless the user approves the exact
 external write.
 
@@ -175,6 +209,9 @@ For API-backed workspaces:
 
 - use `process/api.yaml` as the route and schema source of truth;
 - use `process/api.md` for auth, route selection, error handling, and writes;
+- create `.env.example` for required variable names when env vars are needed;
+- add `.env` to `.gitignore` when local secrets are expected;
+- do not create a real `.env` unless the user supplies non-secret values;
 - load secrets from environment files, not chat history;
 - never print or persist tokens or auth headers;
 - require explicit approval before external writes;
@@ -193,7 +230,8 @@ Workspace-level files:
 - `AGENTS.md`: always-on host instructions.
 - `process/`: workspace-level operating contracts.
 - `scripts/`: only when referenced by `AGENTS.md` or `process/*.md`.
-- `data/`, `artifacts/`, `outputs/`: durable or generated outputs.
+- `data/`: durable source evidence and knowledge artifacts.
+- `artifacts/`: generated deliverables and scratch output.
 
 Skill-level files:
 
@@ -210,6 +248,9 @@ Generated file maps must be exact.
 Do not reference `skills/`, `scripts/`, `.docs/`, or `docs/`
 unless they exist and are part of the workspace contract.
 Do not create or reference `README.md`.
+
+Create or reference source-doc folders only when the user supplies source docs,
+asks for them, or the existing workspace already uses them.
 
 If a folder is optional, omit it from generated docs by default.
 
@@ -242,6 +283,16 @@ data/<localized-object-type>/<object-id>/<yyyy>/<mm>/<dd>/<localized-layer>.md
 data/<localized-object-type>/<object-id>/current/<localized-layer>.md
 ```
 
+Use dated folders only when the workspace needs history:
+
+- source evidence changes over time;
+- snapshots must be preserved;
+- time windows affect interpretation;
+- `current/` needs a traceable source snapshot.
+
+If date tracking is not needed, use the stable seed path or `current/` path
+and document why dated snapshots are omitted.
+
 Required semantic layers:
 
 ```txt
@@ -272,7 +323,8 @@ data/<localized-category>/<localized-object-type>/<object-id>/<yyyy>/<mm>/<dd>/<
 Always define:
 
 - path formula;
-- date source;
+- whether date tracking is required;
+- date source when dated folders are used;
 - object type and ID source;
 - detected language;
 - vocabulary map;

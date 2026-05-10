@@ -72,7 +72,14 @@ Check when present:
 - categories, object types, and layers use that vocabulary;
 - source evidence is defined;
 - `memory`, `tension`, `insight`, `action` layers exist;
-- dated and `current/` paths exist;
+- runtime or ingest flow exists when source-to-layer flow matters;
+- object-type contracts exist when object types have different rules;
+- date tracking rule is explicit;
+- dated paths exist when history or snapshots matter;
+- `current/` paths exist when latest state matters;
+- seed knowledge path is documented when no object ID is appropriate;
+- single seed knowledge uses flat `data/<layer>.md`;
+- multiple seed knowledge bases appear only when requested;
 - TTL and frontmatter rules exist;
 - actions are local recommendations by default.
 
@@ -80,6 +87,13 @@ Red flags:
 
 - layers exist without a domain;
 - memory is generic summary;
+- object-specific rules are buried in `AGENTS.md`;
+- domain-level seed knowledge uses fake object IDs;
+- single seed knowledge is unnecessarily nested;
+- multi-KB layout appears without a user request;
+- multiple seed knowledge bases overlap without routing rules;
+- dated folders are used without a history need;
+- dated folders are missing when snapshots are required;
 - insight is treated as fact;
 - action silently becomes an external task;
 - expired `current/` files are treated as fresh.

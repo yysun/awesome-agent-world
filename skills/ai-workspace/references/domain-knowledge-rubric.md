@@ -33,6 +33,10 @@ Required:
 - decisions the knowledge should support;
 - non-goals.
 
+When object types are known, create object-type process contracts.
+When source docs are domain-level, create seed knowledge files instead of fake
+object folders.
+
 Examples:
 
 - CRM: accounts, contacts, opportunities.
@@ -104,6 +108,38 @@ data/<localized-object-type>/<object-id>/current/<localized-layer>.md
 ```
 
 Use object-first paths.
+Use dated folders only when history, snapshots, or time windows matter.
+
+If date tracking is not needed, use:
+
+```txt
+data/<localized-object-type>/<object-id>/current/<localized-layer>.md
+```
+
+Document why dated snapshots are omitted.
+
+For single-KB domain-level seed knowledge, use:
+
+```txt
+data/<localized-layer>.md
+```
+
+Mention that multiple seed knowledge bases are available.
+Use nested knowledge-base folders only when the user asks:
+
+```txt
+data/<localized-knowledge-base>/<localized-layer>.md
+```
+
+Each one must define:
+
+- scope;
+- authoritative sources;
+- layer filename mapping;
+- read routing;
+- update rule.
+
+Document why no object ID is used.
 
 Do not use:
 
@@ -131,10 +167,20 @@ Document the localized filename for each semantic layer.
 
 ## 5. Frontmatter
 
-Require:
+Object layer files require:
 
 - `object_type`
 - `object_id`
+- `layer`
+- `generated_at`
+- `source_date`
+- `ttl`
+- `expires_at`
+- `status`
+- `source_files`
+
+Seed layer files without object IDs require:
+
 - `layer`
 - `generated_at`
 - `source_date`

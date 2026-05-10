@@ -1,8 +1,8 @@
 ---
 name: git-wiki
 description: |
-   Build and maintain a local code-project wiki under .wiki. Use this skill whenever the user mentions "wiki", "ingest", "refresh wiki", "update wiki", "lint wiki", "check wiki", "document the codebase", or asks a question that can be answered from wiki pages. Also use it when the user asks how something works in the project and a wiki page could capture the answer for future reference.
-version: "1.3.1"
+   Build and maintain a local code-project wiki under .wiki. Use this skill whenever the user mentions "wiki", "ingest", "refresh wiki", "update wiki", "lint wiki", "check wiki", "document the codebase", "export wiki", "bundle wiki", "archive wiki", or asks a question that can be answered from wiki pages. Also use it when the user asks how something works in the project and a wiki page could capture the answer for future reference.
+version: "1.4.0"
 ---
 
 # Project Wiki
@@ -21,6 +21,7 @@ The wiki files themselves may be untracked; read and update the live `.wiki/` co
 * Every wiki page must have YAML frontmatter
 * `.wiki/index.md` must be updated on every ingest
 * Do not ask the user before ingesting
+* Export reads the live working-tree `.wiki/**` files, not the git-tracked repository at `HEAD`
 
 ## Wiki Layout
 
@@ -117,6 +118,49 @@ Workflow:
 Ingest is automatic. Do not ask the user for confirmation.
 
 If git commands fail, report that the wiki skill cannot ingest until git access is restored. Do not substitute directory walking.
+
+## Export
+
+Trigger on:
+
+* `export wiki`
+* `bundle wiki`
+* `archive wiki`
+* `one-page wiki`
+* `prepare wiki for notebooklm`
+* `send wiki to notebooklm`
+
+Workflow:
+
+1. Check whether `.wiki/index.md` exists in the working tree
+   * If `.wiki/` is missing or clearly incomplete, run ingest first without asking
+2. Export the live wiki from the working tree, not from `HEAD`
+3. Use the bundled zero-dependency CLI:
+
+```bash
+node skills/git-wiki/scripts/export-wiki-bundle.mjs \
+  --input-dir .wiki
+```
+
+4. Default output is `index-{simple-timestamp}.md` in the wiki root
+5. If the user wants a different destination, pass `--output-file <path>`
+6. If the user wants a custom label in the export header, pass `--root-name <name>`
+7. The export must produce:
+   * a repository/wiki header with generation date
+   * a table of contents covering every bundled page
+   * one section per wiki file with selected frontmatter preserved
+   * explicit file start/end markers so the bundle works as an archive artifact or NotebookLM source
+8. When the request is specifically about NotebookLM, export first, then hand the produced bundle file to the `notebooklm` skill as the source artifact
+
+Export expectations:
+
+* Prefer bundling `.wiki/**/*.md`
+* Preserve only useful frontmatter fields such as `title`, `type`, `status`, `tags`, `description`, `source_paths`, `updated_at`, and `last_commit`
+* Normalize `[[wiki-links]]` into plain text so downstream tools do not need Obsidian semantics
+* Strip Obsidian image embeds such as `![[image.png]]`
+* Keep the output deterministic by sorting files by relative path
+* Use a simple timestamp in the default filename, for example `.wiki/index-20260510-143522.md`
+* Do not treat export as a substitute for ingest; export packages the current wiki, it does not rebuild it
 
 ### Ingest Priorities
 

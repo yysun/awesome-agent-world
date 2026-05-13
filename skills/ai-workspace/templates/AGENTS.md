@@ -81,6 +81,35 @@ data/<localized-object-type>/<object-id>/current/<localized-layer>.md
 Use only `current/` when latest state is enough.
 Document the date-tracking rule in `process/data.md`.
 
+## Reporting And Output
+
+Delete this section if reports, decks, or exportable summaries are not part of
+the workspace.
+
+Treat natural-language requests such as `report the current status`, `make a
+deck`, `汇报当前情况`, or `输出给业务看的 deck` as reporting requests.
+
+Map each request to one scope before reading files:
+
+- `current-status`
+- `single-object`
+- `object-group`
+- `period-review`
+- `custom-question`
+
+Load `process/<localized-reporting-layer>.md` before producing report or deck
+artifacts.
+
+Default output paths:
+
+```txt
+artifacts/reports/<yyyy>/<mm>/<dd>/<scope>.md
+artifacts/decks/<yyyy>/<mm>/<dd>/<scope>.md
+```
+
+Use the repo-native export chain: markdown, Marp HTML/PDF, PPTX, or a
+documented deterministic exporter.
+
 ## Validation
 
 Minimum validation flow:

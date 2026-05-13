@@ -14,6 +14,7 @@ Example import paths:
 - `worlds/run-check`
 - `agents/copilot`
 - `skills/ai-workspace`
+- `skills/ai-workspace-skill`
 - `skills/git-wiki`
 - `skills/music-to-svg`
 
@@ -21,6 +22,7 @@ Install an individual skill from this repository with:
 
 ```bash
 npx skills add yysun/awesome-agent-world --skill ai-workspace
+npx skills add yysun/awesome-agent-world --skill ai-workspace-skill
 npx skills add yysun/awesome-agent-world --skill git-wiki
 npx skills add yysun/awesome-agent-world --skill music-to-svg
 npx skills add yysun/awesome-agent-world --skill notebooklm
@@ -53,6 +55,7 @@ npx skills add yysun/awesome-agent-world --skill youtube-search
 | Name | Description | Path |
 | ---- | ----------- | ---- |
 | ai-workspace | Creates, reviews, audits, and validates AI workspaces for agent hosts such as Codex, Copilot, and Gemini. | `skills/ai-workspace` |
+| ai-workspace-skill | Scaffolds, reviews, audits, and validates skill-based AI workspaces built around `SKILL.md` and related process contracts, references, templates, scripts, data, and artifacts. | `skills/ai-workspace-skill` |
 | git-wiki | Builds and maintains a local code-project wiki under `.wiki` using git-tracked repository content as the source of truth. | `skills/git-wiki` |
 | music-to-svg | Converts MusicXML into markdown-embedded SVG output using the repository converter script. | `skills/music-to-svg` |
 | notebooklm | Creates and manages NotebookLM notebooks, adds sources, queries content, and generates artifacts through the NotebookLM CLI. | `skills/notebooklm` |
@@ -100,6 +103,8 @@ skills/
 		SKILL.md
 		references/
 		templates/
+	ai-workspace-skill/
+		SKILL.md
 	git-wiki/
 		SKILL.md
 	music-to-svg/

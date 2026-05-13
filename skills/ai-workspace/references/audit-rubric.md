@@ -8,6 +8,7 @@ Classify target:
 
 - file;
 - process contract;
+- reporting/output flow;
 - skill directory;
 - full workspace.
 
@@ -55,6 +56,8 @@ Check:
 - external writes require approval;
 - evidence storage is documented;
 - process files separate fact, judgment, and action.
+- reporting process exists when users can ask for reports, decks, reviews, or
+  exportable summaries.
 
 Red flags:
 
@@ -62,6 +65,7 @@ Red flags:
 - secrets may be printed or stored;
 - write gate is missing;
 - process rules live only in root prose.
+- report/deck scope mapping exists only in chat history.
 
 ## 4. Domain Knowledge
 
@@ -141,12 +145,15 @@ Do not require a skill when `AGENTS.md + process/` is enough.
 Check:
 
 - canonical output location;
+- report and deck output locations when reporting exists;
 - path formula;
 - object type, object ID, and layer rules;
 - localized vocabulary map;
 - overwrite or versioning rule;
 - durable vs temporary distinction;
 - reviewable history.
+- export chain for readable reports or decks;
+- mapping from natural-language request to explicit output scope.
 
 Red flags:
 
@@ -154,8 +161,35 @@ Red flags:
 - ambiguous category/layer names;
 - knowledge paths omit object identity;
 - overwrite behavior is unclear.
+- report requests do not map to current status, single object, object group,
+  period review, or custom question;
+- deck/report export format is undocumented;
+- generated outputs cannot be traced back to source and layer files.
 
-## 8. Validation
+## 8. Reporting And Output
+
+Check when reports, presentations, decks, summaries, or business reviews are
+part of the workspace:
+
+- natural-language triggers are documented;
+- request scope mapping is explicit;
+- required source/layer reads are defined for each scope;
+- audience and visible-language rules exist;
+- report/deck templates exist or the output shape is otherwise specified;
+- export route matches the repo's runtime;
+- artifact paths are documented;
+- validation checks generated files, not just prose.
+
+Red flags:
+
+- report scope is guessed silently;
+- report summarizes without preserving sources, memory, tension, insight, and
+  action;
+- export depends on an undocumented manual step;
+- deck content is produced but no readable/exportable artifact is written;
+- report templates contain conclusions instead of structure.
+
+## 9. Validation
 
 Check:
 

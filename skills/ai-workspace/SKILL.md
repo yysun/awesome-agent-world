@@ -19,6 +19,7 @@ An AI workspace makes behavior visible through files:
 - optional `skills/` for host-discoverable reusable workflows;
 - optional `scripts/` only for deterministic logic that host tools cannot do well;
 - durable `data/` and `artifacts/`;
+- natural-language report and deck output flows;
 - a simple validation flow.
 
 Prefer `AGENTS.md + process/` by default.
@@ -101,6 +102,7 @@ Before writing files:
 - ask what domain the knowledge base is for only if missing;
 - allow the user to skip domain setup;
 - define durable artifact paths;
+- define report/deck trigger language and scope mapping when outputs matter;
 - define the smallest useful validation flow.
 
 When creating a knowledge base:
@@ -113,6 +115,8 @@ When creating a knowledge base:
 - create a runtime process file when source-to-layer flow matters;
 - create object-type process files when object types are known;
 - create seed knowledge files when source docs are domain-level, not object-level;
+- create a reporting process file when users need natural-language reports,
+  decks, or exportable summaries;
 - create concrete object folders only for objects named by the user;
 - do not invent object IDs just to fill the tree.
 
@@ -126,6 +130,9 @@ Use:
 - `templates/data-contract.md` for knowledge folder contracts;
 - `templates/runtime-process.md` for source-to-layer workflow contracts;
 - `templates/object-process.md` for object-type contracts;
+- `templates/reporting-process.md` for natural-language report/deck workflows;
+- `templates/report-artifact.md` for readable report artifacts;
+- `templates/deck-outline.md` for deck-ready outlines;
 - layer templates for the semantic layers below.
 
 Do not create generic file I/O or web-fetch scripts.
@@ -160,6 +167,9 @@ process/<action-layer>.md
 Create `process/<runtime-layer>.md` only when source-to-layer flow matters.
 Create `process/<object-folder>/<object-type>.md` only when object types are
 known and need distinct rules.
+Create `process/<reporting-layer>.md` when users can ask for reports,
+presentations, reviews, summaries, or exportable status output in natural
+language.
 
 Layer meaning:
 
@@ -203,6 +213,74 @@ Do not invent an object ID for seed knowledge.
 Actions are not external tasks or writes unless the user approves the exact
 external write.
 
+## Reporting And Output
+
+Support natural-language reporting when the workspace has durable knowledge.
+
+Users may ask for reports with phrases such as:
+
+```txt
+report the current status
+make a presentation
+汇报当前情况
+做一份复盘
+输出给业务看的 deck
+```
+
+Map every report request into an explicit scope before reading files:
+
+- current status: latest maintained `current/` layers or seed knowledge;
+- single object: one object type and object ID;
+- object group: named objects, watchlists, cohorts, categories, or queues;
+- date or period review: dated source and layer files for a time window;
+- custom question: the minimum source and layer set needed to answer it.
+
+If the scope is ambiguous, choose the smallest useful scope and state it.
+Ask only when the report could materially change audience, object set, or
+external write behavior.
+
+Report and deck artifacts should be readable and exportable.
+
+Default paths:
+
+```txt
+artifacts/reports/<yyyy>/<mm>/<dd>/<scope>.md
+artifacts/decks/<yyyy>/<mm>/<dd>/<scope>.md
+```
+
+Use repo-native export routes:
+
+- Markdown report only when no export tooling exists.
+- Marp/HTML/PDF when the repo already uses markdown slide export.
+- PPTX when the workspace or host has a presentation runtime.
+- Script-backed export only when a deterministic exporter exists or is created
+  for a real reason.
+
+Create matching process and template files when reporting is part of the
+workspace contract:
+
+```txt
+process/<reporting-layer>.md
+templates/report-artifact.md
+templates/deck-outline.md
+```
+
+Reporting process files must define:
+
+- natural-language trigger phrases;
+- scope mapping rules;
+- required source and layer reads for each scope;
+- audience and visible-language rules;
+- report/deck section order;
+- export path and format;
+- validation checks for readability and generated files.
+
+Do not let reporting become a detached summary. It must preserve the chain:
+
+```txt
+sources -> memory -> tension -> insight -> action -> report/deck
+```
+
 ## API Workspaces
 
 For API-backed workspaces:
@@ -229,9 +307,13 @@ Workspace-level files:
 
 - `AGENTS.md`: always-on host instructions.
 - `process/`: workspace-level operating contracts.
+- `process/<reporting-layer>.md`: report/deck scope mapping and export flow
+  when output workflows exist.
 - `scripts/`: only when referenced by `AGENTS.md` or `process/*.md`.
 - `data/`: durable source evidence and knowledge artifacts.
 - `artifacts/`: generated deliverables and scratch output.
+- `artifacts/reports/` and `artifacts/decks/`: readable, exportable outputs
+  when reporting is part of the workspace.
 
 Skill-level files:
 
@@ -332,12 +414,23 @@ Always define:
 - parent folder creation;
 - overwrite or version rule.
 
+For reports and decks, always define:
+
+- natural-language trigger phrases;
+- scope mapping;
+- source/layer read set;
+- output format;
+- export chain;
+- artifact path;
+- validation check.
+
 ## Review / Audit
 
 Classify the target:
 
 - file: one `AGENTS.md`, `SKILL.md`, prompt, script, or reference;
 - process: one or more `process/` files;
+- output flow: report/deck scope mapping, templates, and export chain;
 - skill: one skill directory;
 - workspace: full repo-level agent surface.
 
@@ -361,6 +454,7 @@ Levels:
 - contract: instructions and artifacts agree;
 - execution: the main host flow ran;
 - artifact: outputs match the documented contract.
+- export: report/deck files were created in the documented format and path.
 
 Say:
 
@@ -391,6 +485,7 @@ Files Created Or Changed
 Host Capability Assumptions
 Workspace Layout
 Process Contracts
+Reporting And Output
 Optional Skills
 Validation Status
 Remaining Gaps

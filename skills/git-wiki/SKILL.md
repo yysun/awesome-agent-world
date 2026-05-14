@@ -1,42 +1,52 @@
 ---
 name: git-wiki
 description: |
-   Build and maintain a local code-project wiki under .wiki. Use this skill whenever the user mentions "wiki", "ingest", "refresh wiki", "update wiki", "lint wiki", "check wiki", "document the codebase", "export wiki", "bundle wiki", "archive wiki", or asks a question that can be answered from wiki pages. Also use it when the user asks how something works in the project and a wiki page could capture the answer for future reference.
-version: "1.4.0"
+   Build and maintain local code-project wikis under .wiki or language-specific wiki roots such as .wiki-cn and .wiki-fr. Use this skill whenever the user mentions "wiki", "ingest", "refresh wiki", "update wiki", "lint wiki", "check wiki", "document the codebase", "export wiki", "bundle wiki", "archive wiki", or asks a question that can be answered from wiki pages. Also use it when the user asks how something works in the project and a wiki page could capture the answer for future reference.
+version: "1.5.0"
 ---
 
 # Project Wiki
 
-Maintain a local wiki for a code project under `.wiki`.
+Maintain local wikis for a code project under `.wiki` by default, with optional language-specific roots such as `.wiki-cn`, `.wiki-fr`, or an exact user-named wiki directory such as `wiki-cn`.
 
 Source of truth is always the current git-tracked repository files at `HEAD`, including tracked documentation in `.docs/` and `docs/`, not the wiki.
-The wiki files themselves may be untracked; read and update the live `.wiki/` contents from the working tree when present.
+The wiki files themselves may be untracked; read and update the live selected wiki root from the working tree when present.
 
 ## Rules
 
 * Operate only on git-tracked files and git history
 * Ignore staged and unstaged uncommitted changes; ingest and query verification use committed content at `HEAD` only
-* Exclude `.wiki/**` from git-based source selection
-* Do not assume `.wiki/**` is git-tracked; use the current `.wiki/index.md` checkpoint when it exists
+* Select exactly one wiki root per request. Use `.wiki` by default; use the explicit root or language the user names, such as `.wiki-cn`, `wiki-cn`, `.wiki-fr`, "Chinese wiki", or "French wiki"
+* Each wiki root is independent. Do not sync, compare, translate, merge, or copy pages between language roots unless the user explicitly asks
+* Exclude all wiki roots from git-based source selection: `.wiki/**`, `.wiki-*/**`, and `wiki-*/**`
+* Do not assume any wiki root is git-tracked; use the selected root's current `index.md` checkpoint when it exists
 * Every wiki page must have YAML frontmatter
-* `.wiki/index.md` must be updated on every ingest
+* The selected root's `index.md` must be updated on every ingest
 * Do not ask the user before ingesting
-* Export reads the live working-tree `.wiki/**` files, not the git-tracked repository at `HEAD`
+* Export reads the live working-tree files under the selected wiki root, not the git-tracked repository at `HEAD`
 
 ## Wiki Layout
 
 Required:
 
-* `.wiki/index.md` — master catalog (tracks last ingest commit)
+* `<wiki-root>/index.md` — master catalog (tracks last ingest commit for that root only)
 
 Optional (create as needed):
 
-* `.wiki/features/` — one page per significant feature, module
-* `.wiki/bug-fixes/` — one page per notable bug fix or patch
-* `.wiki/concepts/` — cross-cutting ideas and patterns
-* `.wiki/entities/` — data models, schemas, types
-* `.wiki/flows/` — sequences, pipelines, request lifecycles
-* `.wiki/notes/` — ad-hoc or open questions
+* `<wiki-root>/features/` — one page per significant feature, module
+* `<wiki-root>/bug-fixes/` — one page per notable bug fix or patch
+* `<wiki-root>/concepts/` — cross-cutting ideas and patterns
+* `<wiki-root>/entities/` — data models, schemas, types
+* `<wiki-root>/flows/` — sequences, pipelines, request lifecycles
+* `<wiki-root>/notes/` — ad-hoc or open questions
+
+### Wiki root selection
+
+* Default wiki root: `.wiki`
+* Language-specific roots: prefer `.wiki-<language-code>` when creating a new language wiki, for example `.wiki-cn` for Chinese and `.wiki-fr` for French
+* If the user names an exact directory, such as `wiki-cn`, use that exact root instead of normalizing it
+* Language roots do not inherit checkpoints, pages, links, or stale status from each other
+* When the user asks for a language wiki by language name, write page prose in that language and keep code identifiers, file paths, and API names unchanged
 
 ## Page Conventions
 
@@ -49,12 +59,13 @@ Optional (create as needed):
 title: "Project Wiki"
 type: "index"
 status: "active"
+language: "<language-code|default>"
 last_commit: "<full-sha>"
 updated_at: "YYYY-MM-DD"
 ---
 ```
 
-`last_commit` is the full git commit SHA at the time of the most recent full-repository ingest. This checkpoint lives in the current `.wiki/index.md` file whether or not `.wiki/` is git-tracked. On the next ingest, prefer this saved `last_commit` to find changed files with `git diff --name-status -M <last_commit> HEAD`.
+`last_commit` is the full git commit SHA at the time of the most recent full-repository ingest for the selected wiki root. This checkpoint lives in the selected root's current `index.md` file whether or not that root is git-tracked. On the next ingest for the same root, prefer this saved `last_commit` to find changed files with `git diff --name-status -M <last_commit> HEAD`.
 
 If git metadata is unavailable, do not fall back to filesystem scanning. Ingest and lint are unavailable until git access works again.
 
@@ -65,18 +76,21 @@ If git metadata is unavailable, do not fall back to filesystem scanning. Ingest 
 title: "Page Title"
 type: "feature|bug-fix|concept|entity|flow|note"
 status: "draft|active|stale"
+language: "<language-code|default>"
 source_paths: []
 updated_at: "YYYY-MM-DD"
 ---
 ```
+
+Set `language` to `default` for `.wiki`, `cn` for `.wiki-cn` or `wiki-cn`, `fr` for `.wiki-fr`, and the matching language code for other language-specific roots.
 
 Use `status: "stale"` when the source file has changed significantly since the page was last updated, or when the page describes something that no longer exists. During ingest, pages whose `source_paths` changed since `last_commit` should be updated or marked stale. Do not delete stale pages automatically — mark them and note the drift so the user can decide.
 
 ### Page naming
 
 * Use lowercase, hyphenated filenames: `auth-middleware.md`, `user-schema.md`
-* Mirror the source path when making feature pages: `src/api/routes.ts` → `.wiki/features/src-api-routes.md`
-* Use descriptive names for concepts and flows: `.wiki/concepts/request-lifecycle.md`
+* Mirror the source path when making feature pages: `src/api/routes.ts` → `<wiki-root>/features/src-api-routes.md`
+* Use descriptive names for concepts and flows: `<wiki-root>/concepts/request-lifecycle.md`
 
 ### Wiki links
 
@@ -89,31 +103,35 @@ Trigger on:
 * `ingest`
 * `ingest [file]`
 * `ingest [folder]`
+* `ingest wiki-cn`
+* `ingest .wiki-fr`
 * `refresh wiki`
 * `update wiki`
+* `update Chinese wiki`
 
 Workflow:
 
-1. Read `.wiki/index.md` from the working tree if it exists, even when `.wiki/` is untracked — note `last_commit` from frontmatter
-   * Missing `.wiki/index.md` or a missing `last_commit` means there is no prior ingest checkpoint
-2. Run `git rev-parse HEAD` to get the current HEAD commit SHA
-3. Detect changed files:
-   * If `last_commit` is set: `git diff --name-status -M <last_commit> HEAD` and exclude `.wiki/**`
-   * Use the saved `last_commit` even if the wiki is untracked; do not treat an untracked `.wiki/` as a fresh ingest from `HEAD`
+1. Select the wiki root from the request. Default to `.wiki`; use an explicit root or language-specific root when named
+2. Read `<wiki-root>/index.md` from the working tree if it exists, even when the wiki root is untracked — note `last_commit` from frontmatter
+   * Missing `<wiki-root>/index.md` or a missing `last_commit` means there is no prior ingest checkpoint for that root
+3. Run `git rev-parse HEAD` to get the current HEAD commit SHA
+4. Detect changed files:
+   * If `last_commit` is set: `git diff --name-status -M <last_commit> HEAD` and exclude all wiki roots (`.wiki/**`, `.wiki-*/**`, `wiki-*/**`)
+   * Use the saved `last_commit` even if the selected wiki root is untracked; do not treat an untracked wiki root as a fresh ingest from `HEAD`
    * Use the git status codes to distinguish added, modified, deleted, and renamed paths when updating wiki pages
-   * If no prior ingest: build a broad ingest candidate set from `git ls-files` at `HEAD`, excluding `.wiki/**` (see Ingest Priorities below)
-4. Resolve scope:
+   * If no prior ingest: build a broad ingest candidate set from `git ls-files` at `HEAD`, excluding all wiki roots (see Ingest Priorities below)
+5. Resolve scope:
    * If a file or folder is specified, prioritize it — limit the tracked candidate set to that scope
-   * For a scoped ingest, do not advance `.wiki/index.md:last_commit` unless the scoped ingest also covers every file changed since `last_commit`
+   * For a scoped ingest, do not advance `<wiki-root>/index.md:last_commit` unless the scoped ingest also covers every file changed since `last_commit`
    * Otherwise ingest changed files first, then fill in missing coverage
-5. Read relevant tracked repository files — understand their role
-6. Update or create wiki pages under `.wiki/`
-7. Mark pages for deleted source files as `status: "stale"` with a note in the page body, and update moved or renamed pages based on rename information from git
-8. Update `.wiki/index.md`:
+6. Read relevant tracked repository files — understand their role
+7. Update or create wiki pages under the selected wiki root
+8. Mark pages in the selected wiki root for deleted source files as `status: "stale"` with a note in the page body, and update moved or renamed pages based on rename information from git
+9. Update `<wiki-root>/index.md`:
    * Always set `updated_at` to today
    * Set `last_commit` to the current HEAD SHA only after a full ingest or after processing the complete changed-file set from the previous `last_commit`
    * If a broad ingest stops early after partial coverage, leave `last_commit` unchanged and note in `index.md` that bootstrap coverage is still partial
-   * Never discard an existing saved `last_commit` merely because `.wiki/` is untracked
+   * Never discard an existing saved `last_commit` merely because the selected wiki root is untracked
 
 Ingest is automatic. Do not ask the user for confirmation.
 
@@ -132,34 +150,35 @@ Trigger on:
 
 Workflow:
 
-1. Check whether `.wiki/index.md` exists in the working tree
-   * If `.wiki/` is missing or clearly incomplete, run ingest first without asking
-2. Export the live wiki from the working tree, not from `HEAD`
-3. Use the bundled zero-dependency CLI:
+1. Select the wiki root from the request. Default to `.wiki`; use an explicit root or language-specific root when named
+2. Check whether `<wiki-root>/index.md` exists in the working tree
+   * If the selected wiki root is missing or clearly incomplete, run ingest first without asking
+3. Export the live selected wiki from the working tree, not from `HEAD`
+4. Use the bundled zero-dependency CLI:
 
 ```bash
 node skills/git-wiki/scripts/export-wiki-bundle.mjs \
-  --input-dir .wiki
+  --input-dir <wiki-root>
 ```
 
-4. Default output is `index-{simple-timestamp}.md` in the wiki root
-5. If the user wants a different destination, pass `--output-file <path>`
-6. If the user wants a custom label in the export header, pass `--root-name <name>`
-7. The export must produce:
+5. Default output is `index-{simple-timestamp}.md` in the selected wiki root
+6. If the user wants a different destination, pass `--output-file <path>`
+7. If the user wants a custom label in the export header, pass `--root-name <name>`
+8. The export must produce:
    * a repository/wiki header with generation date
    * a table of contents covering every bundled page
    * one section per wiki file with selected frontmatter preserved
    * explicit file start/end markers so the bundle works as an archive artifact or NotebookLM source
-8. When the request is specifically about NotebookLM, export first, then hand the produced bundle file to the `notebooklm` skill as the source artifact
+9. When the request is specifically about NotebookLM, export first, then hand the produced bundle file to the `notebooklm` skill as the source artifact
 
 Export expectations:
 
-* Prefer bundling `.wiki/**/*.md`
-* Preserve only useful frontmatter fields such as `title`, `type`, `status`, `tags`, `description`, `source_paths`, `updated_at`, and `last_commit`
+* Prefer bundling `<wiki-root>/**/*.md`
+* Preserve only useful frontmatter fields such as `title`, `type`, `status`, `language`, `tags`, `description`, `source_paths`, `updated_at`, and `last_commit`
 * Normalize `[[wiki-links]]` into plain text so downstream tools do not need Obsidian semantics
 * Strip Obsidian image embeds such as `![[image.png]]`
 * Keep the output deterministic by sorting files by relative path
-* Use a simple timestamp in the default filename, for example `.wiki/index-20260510-143522.md`
+* Use a simple timestamp in the default filename, for example `.wiki-fr/index-20260510-143522.md`
 * Do not treat export as a substitute for ingest; export packages the current wiki, it does not rebuild it
 
 ### Ingest Priorities
@@ -169,11 +188,11 @@ When doing a broad ingest from git-tracked files, work in this order and stop wh
 1. Root readme and tracked documentation under `.docs/` and `docs/`
 2. Package/build/workspace config (`package.json`, `pyproject.toml`, `Cargo.toml`, etc.)
 3. Entry points (`main.ts`, `index.ts`, `app.py`, `cmd/`, etc.)
-4. Core features and shared utilities → `.wiki/features/`
-5. API definitions, schemas, and persistence layers → `.wiki/features/` or `.wiki/entities/`
-6. Notable bug fixes visible in git history → `.wiki/bug-fixes/`
-7. Jobs, queues, background workers → `.wiki/features/`
-8. UI structure (if present) → `.wiki/features/`
+4. Core features and shared utilities → `<wiki-root>/features/`
+5. API definitions, schemas, and persistence layers → `<wiki-root>/features/` or `<wiki-root>/entities/`
+6. Notable bug fixes visible in git history → `<wiki-root>/bug-fixes/`
+7. Jobs, queues, background workers → `<wiki-root>/features/`
+8. UI structure (if present) → `<wiki-root>/features/`
 9. Tests (summarize patterns, don't document every test file)
 10. Cross-cutting concepts, entities, and flows worth capturing
 
@@ -183,13 +202,14 @@ For large repos (100+ files), focus on depth over breadth: deeply document the 1
 
 When asked a project question:
 
-1. Read `.wiki/index.md` if it exists
-2. Read relevant wiki pages if they exist
-3. If the wiki is missing, the relevant page is missing, or a page is marked stale, verify directly against git-tracked repository source before answering
-4. Prefer tracked documentation in `.docs/` and `docs/` when it is relevant to the question, then confirm against code or config when needed
-5. Verify against git-tracked repository source when the answer involves specific values (counts, names, configs)
-6. Answer with a concise explanation and `[[wiki-link]]` citations when relevant wiki pages exist
-7. If you created new understanding not yet in the wiki, mention it — the user can ask you to save it
+1. Select the wiki root from the request. Default to `.wiki`; use an explicit root or language-specific root when named
+2. Read `<wiki-root>/index.md` if it exists
+3. Read relevant wiki pages in the selected root if they exist
+4. If the selected wiki is missing, the relevant page is missing, or a page is marked stale, verify directly against git-tracked repository source before answering
+5. Prefer tracked documentation in `.docs/` and `docs/` when it is relevant to the question, then confirm against code or config when needed
+6. Verify against git-tracked repository source when the answer involves specific values (counts, names, configs)
+7. Answer in the selected wiki's language when the user named a language root, with concise explanation and `[[wiki-link]]` citations when relevant wiki pages exist
+8. If you created new understanding not yet in the selected wiki root, mention it — the user can ask you to save it
 
 ## Lint
 
@@ -198,6 +218,8 @@ Trigger on:
 * `lint`
 * `lint wiki`
 * `check wiki`
+* `lint .wiki-fr`
+* `check Chinese wiki`
 
 Checks:
 
@@ -230,6 +252,9 @@ Do not auto-fix unless explicitly asked.
 
 ## Writing Guidance
 
+* Write for a smart newcomer, not a maintainer. Use layman's terms first, then add the exact code term only when it helps: "the login check" before "auth middleware", "saved data shape" before "schema", "background task" before "worker"
+* Explain why a file matters in the product or workflow before naming implementation details
+* Avoid unexplained acronyms, framework jargon, and internal shorthand. If a technical term is necessary, define it in the same sentence
 * Summarize; do not reproduce large code blocks — a few lines of example code is fine, but explain patterns rather than paste implementations
 * Use concrete file paths as anchors (`src/api/routes.ts:42`)
 * Separate facts (directly read from source) from inferences (your interpretation)
@@ -241,7 +266,7 @@ Do not auto-fix unless explicitly asked.
 
 The wiki succeeds when:
 
-* `.wiki/index.md` helps a new reader navigate the project in under 2 minutes
+* `<wiki-root>/index.md` helps a new reader navigate the project in under 2 minutes
 * Answers can start from wiki pages and be verified in code
 * Ingest detects changed files automatically using the saved `last_commit`
 * Lint catches drift before the wiki becomes misleading

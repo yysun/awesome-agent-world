@@ -5,7 +5,7 @@ description: Use when user needs to plan, storyboard, review, critique, or rewri
 
 # Story Deck Strategist
 
-Build persuasive presentation storyboards using one selected framework. Do not teach SCR or BBP back to the user; use the framework as an output contract and focus on the user's storyline, titles, visuals, notes, and artifacts.
+Build persuasive presentation storyboards using one selected framework. Do not teach SCR or BBP back to the user; use the framework as an internal validation and output contract. Focus on the user's storyline, titles, visuals, notes, and artifacts.
 
 ## Core Contract
 
@@ -17,7 +17,8 @@ Build persuasive presentation storyboards using one selected framework. Do not t
 **Mandatory behavior**
 - Select the central Story Thesis before creating slides.
 - Build one deck-wide arc. Each slide is one scene beat, not a mini deck.
-- In BBP mode, shape the natural business argument before assigning BBP labels.
+- In BBP mode, validate the natural business argument before assigning BBP labels.
+- Treat examples by framework: SCR uses examples as support; BBP uses examples as scenes.
 - Show a slide-title approval list before detailed storyboard work.
 - Run the Title Refinement Pass before showing that approval list.
 - Keep evidence precise; never invent metrics, quotes, customer facts, or financial figures.
@@ -33,8 +34,8 @@ Read only what the request needs:
 
 - Slide-title approval, quick outline, full storyboard, critique, rewrite, Marp, or PPTX: `references/headlines.md`
 - Full storyboard, critique, rewrite, Marp, or PPTX: `references/story-scenes.md`
-- SCR mode: `references/scr.md`
-- BBP mode: `references/bbp.md`
+- SCR mode: `references/scr.md` for validation rules and allowed labels
+- BBP mode: `references/bbp.md` for validation rules and allowed labels
 - Bitmap visuals or generated image assets: `references/visuals.md`
 - Markdown save, Marp, PPTX, or finished deck handoff: `references/handoff.md`
 
@@ -92,10 +93,10 @@ Select the strongest thesis based on clarity, tension, business consequence, and
 
 ### Step 3 - Framework Storyline
 
-Use the selected framework reference as the contract:
+Use the selected framework reference as the validation contract:
 
-- SCR: use `references/scr.md` for SCQA, Pyramid, dot-dash, and slide labels.
-- BBP: first run the BBP Flow Shaping Pass in `references/bbp.md`, then map the natural business flow into Act I/II/III, anchors/explanation/backup, and slide labels.
+- SCR: validate the storyline against `references/scr.md` for SCQA, Pyramid, dot-dash, example-as-support behavior, and slide labels.
+- BBP: first run the BBP Flow Validation Pass in `references/bbp.md`, then map the natural business flow into Act I/II/III, anchors/explanation/backup, example-as-scene behavior, and slide labels.
 
 In BBP mode, output `Natural Business Flow -> BBP Label Mapping` before the formal BBP storyline. Output the framework storyline only once, then continue to Step 4. For critique-only requests, go to Step 6 after establishing the ideal storyline.
 
@@ -120,6 +121,7 @@ Rules:
 - For SCR, titles are Dots/action-title claims, not topics.
 - For BBP, titles are reveal headlines that make the next scene necessary.
 - In BBP Act II, anchors are arguments, not product history.
+- SCR examples prove or clarify a Dot; BBP examples create concrete scene beats.
 - For finished artifacts such as Marp, PPTX, or generated visuals, pause here by default when user interaction is available and the user has not requested immediate completion. Continue immediately only if the user explicitly asked to create the finished artifact now, skip title approval, or run non-interactively; include the refined title list in the handoff or artifact.
 - Ask: "Approve these slide titles before I build the detailed storyboard?"
 - For quick outlines, stop here unless the user asks for details.
@@ -197,9 +199,11 @@ Before finalizing, confirm:
 - [ ] Strategic decks considered 2-3 thesis candidates unless the user supplied a strong thesis.
 - [ ] Selected thesis includes Audience Shift, Core Tension, False Belief, and Turning Point.
 - [ ] Title approval gate completed before detailed storyboard work.
-- [ ] BBP Flow Shaping Pass completed before title refinement when BBP is selected.
+- [ ] BBP Flow Validation Pass completed before title refinement when BBP is selected.
 - [ ] Title Refinement Pass completed before the approval list.
 - [ ] SCR dot-dash or BBP three-act contract was followed.
+- [ ] Examples obey the framework rule: SCR examples support claims; BBP examples operate as scenes.
+- [ ] Output applies the selected SCR/BBP contract without teaching or explaining the framework unless the user asked.
 - [ ] Each slide has one scene beat, scene role, emotional job, bridge, visual recommendation, and speakable notes.
 - [ ] Titles are concrete, readable, domain-specific, and not generic corporate filler.
 - [ ] Unsupported claims are labeled `Assumption:` or `Evidence gap:`.

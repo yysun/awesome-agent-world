@@ -1,6 +1,6 @@
-# SCR Contract
+# SCR Validation Contract
 
-Use this reference when the selected framework is SCR. Assume the model already knows SCR; this file only defines this skill's output contract.
+Use this reference when the selected framework is SCR. This is a validation and output contract, not SCR teaching material. Assume the model already knows SCR. Do not explain the framework to the user unless they explicitly ask.
 
 ## Step 3 Storyline Format
 
@@ -16,14 +16,16 @@ Pyramid:
 - Evidence Base: [Facts, analyses, examples, charts, or assumptions.]
 ```
 
-## Required Execution Rules
+## Validation Rules
 
-- Use Pyramid Principle structure: answer first when appropriate, then 3-5 MECE supports, then evidence.
-- Use dot-dash execution:
+- The storyline passes only if the Answer is clear before the supporting logic when that is appropriate for the audience.
+- The Pyramid passes only if it has 3-5 MECE supports and a concrete evidence base.
+- The dot-dash structure passes only if:
   - Dot = one action-title claim per slide.
   - Dash = evidence, visual proof, chart, example, or speaker-note support.
 - One Dot equals one slide. Split slides that need two Dots.
 - Every Dot must be a claim, not a topic label such as "Market Overview" or "Risks."
+- Examples are support. They must prove, clarify, or make credible a Dot; they should not become standalone story scenes.
 - Keep visible slide text minimal; put detailed Dashes in notes, charts, and evidence callouts.
 - Final action slide names the specific action, owner, and timing.
 

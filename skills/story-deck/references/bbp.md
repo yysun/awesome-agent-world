@@ -1,36 +1,36 @@
-# BBP Contract
+# BBP Validation Contract
 
-Use this reference when the selected framework is BBP / Beyond Bullet Points. Assume the model already knows BBP; this file only defines this skill's output contract.
+Use this reference when the selected framework is BBP / Beyond Bullet Points. This is a validation and output contract, not BBP teaching material. Assume the model already knows BBP. Do not explain the framework to the user unless they explicitly ask.
 
-## BBP Flow Shaping Pass
+## BBP Flow Validation Pass
 
-Before writing the Step 3 BBP storyline or the slide-title approval list, draft the strongest natural business sequence first, then map it to BBP labels.
+Before writing the Step 3 BBP storyline or the slide-title approval list, validate the natural business sequence before assigning BBP labels. Labels are metadata; they should not decide the argument.
 
-General BBP flow:
+A valid BBP business sequence should pass these checks:
 
-1. Establish the audience's current world.
-2. Name the belief or habit that no longer works.
-3. Show the cost of staying there.
-4. Reveal the new lens.
-5. Show the path forward.
-6. Prove the path is credible.
-7. Make the decision feel necessary and doable.
+- It starts from the audience's current world.
+- It names the belief or habit that no longer works.
+- It shows the cost of staying there.
+- It reveals the new lens.
+- It shows the path forward.
+- It proves the path is credible.
+- It makes the decision feel necessary and doable.
 
-For product strategy, AI workflow, CRM, task management, or operating model decks, this sharper flow often works better:
+For product strategy, AI workflow, CRM, task management, or operating model decks, the sequence should also pass the relevant sharper checks:
 
-1. Start with the business request and reframe the real problem.
-2. Show why the obvious solution adds work but does not solve the miss.
-3. Reveal where the real work is hidden in the domain.
-4. Name the proposed shift or chain.
-5. Show the operating model or causal chain.
-6. Separate audiences, teams, or workflows when they need different treatment.
-7. Prove accountability: context, evidence, reason, confirmation, traceability.
-8. Show the user or operating experience shift.
-9. Position what the product/module really is.
-10. Name what to build first.
-11. Land the payoff in business terms.
+- It starts with the business request and reframes the real problem.
+- It shows why the obvious solution adds work but does not solve the miss.
+- It reveals where the real work is hidden in the domain.
+- It names the proposed shift or chain.
+- It shows the operating model or causal chain.
+- It separates audiences, teams, or workflows when they need different treatment.
+- It proves accountability: context, evidence, reason, confirmation, traceability.
+- It shows the user or operating experience shift.
+- It positions what the product/module really is.
+- It names what to build first.
+- It lands the payoff in business terms.
 
-Use this pass to improve flow, not to lengthen the deck. Choose the general or specialized flow based on the topic, then merge or skip beats that do not earn a slide.
+Use this pass as a validation filter, not a deck-length mandate. Merge, skip, or compress beats that do not earn a slide.
 
 Output this before the formal BBP storyline:
 
@@ -62,11 +62,12 @@ Act III - The Thrilling Conclusion:
 - Call to Action: [Specific action, decision, owner, or next step.]
 ```
 
-## Required Execution Rules
+## Validation Rules
 
-- Use the three-act BBP structure: Act I setup, Act II anchors/explanation/backup, Act III conclusion.
-- Shape the natural business argument before assigning BBP labels. Labels are metadata; they should not flatten the story into generic template slots.
+- The storyline passes only if it uses the three-act BBP structure: Act I setup, Act II anchors/explanation/backup, Act III conclusion.
+- The flow passes only if the natural business argument is clear before BBP labels are assigned.
 - Act II anchors must be arguments, not product history. Use `V0/V1/V2` history only as support when it proves the argument.
+- Examples are scenes. Use concrete real-world moments, users, workflows, failures, decisions, or consequences to make the audience recognize the story; do not bury them as detached proof bullets.
 - Every slide should feel like a scene; every headline should feel like a reveal; every visual should feel like the scene image; every note should feel like spoken narration.
 - Separate visual and spoken channels: slides carry the visual idea, notes carry the interpretation.
 - Key Point / Anchor slides should be simplest and strongest; Explanation slides add context; Backup slides hold granular support.

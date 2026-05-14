@@ -8,6 +8,7 @@ Use this reference when visual recommendations, image generation briefs, or gene
 - The visual supports the selected framework's storyline.
 - For SCR, the visual is the main Dash: it proves the Dot/action title or resolves the slide's question.
 - For BBP, the visual carries the visual track of the storyboard and works with the spoken narration.
+- For SCR, examples in visuals are support evidence. For BBP, concrete real-world examples should appear as scene images or narrated moments.
 - Every visual should behave like the scene image: it carries the gap, contrast, proof, before/after, or decision moment.
 - Specify: type, composition, encoding, focal point, and how it advances the story.
 - Generic descriptions like "bar chart" or "process diagram" are unfinished.
